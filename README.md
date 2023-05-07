@@ -14,10 +14,10 @@
 
 
 
-![GitHub forks](https://img.shields.io/github/forks/NofussComputing/git_configuration?logo=github&style=plastic&color=000000&labell=Forks) ![GitHub stars](https://img.shields.io/github/stars/NofussComputing/git_configuration?color=000000&logo=github&style=plastic) ![Github Watchers](https://img.shields.io/github/watchers/NofussComputing/git_configuration?color=000000&label=Watchers&logo=github&style=plastic)
+![GitHub forks](https://img.shields.io/github/forks/NofussComputing/execution_environment?logo=github&style=plastic&color=000000&labell=Forks) ![GitHub stars](https://img.shields.io/github/stars/NofussComputing/execution_environment?color=000000&logo=github&style=plastic) ![Github Watchers](https://img.shields.io/github/watchers/NofussComputing/execution_environment?color=000000&label=Watchers&logo=github&style=plastic)
 <br>
 
-This project is hosted on [gitlab](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment) and has a read-only copy hosted on [Github](https://github.com/NofussComputing/git_configuration).
+This project is hosted on [gitlab](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment) and has a read-only copy hosted on [Github](https://github.com/NofussComputing/execution_environment).
 
 ----
 
