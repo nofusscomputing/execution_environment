@@ -1,5 +1,16 @@
 stages:
+    - validation
     - sync
+
+dummy:
+    image: alpine:latest
+    stage: validation
+    script:
+      - echo dummy job
+    rules:
+      - if: "$CI_COMMIT_BRANCH"
+        when: always
+      - when: never
 
 
 .git_push_mirror:
