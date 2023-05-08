@@ -28,7 +28,7 @@ LABEL \
   # org.opencontainers.image.revision="{git commit sha at time of build}" \
   org.opencontainers.image.title="No Fuss Computings Ansible Execution Environment" \
   org.opencontainers.image.description="An ansible execution environment for awx/tower and CI/CD pipelines" \
-  org.opencontainers.image.vendor="No Fuss Computing" \
+  org.opencontainers.image.vendor="No Fuss Computing"
   # org.opencontainers.image.version="{git tag}"
 
 
