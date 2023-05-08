@@ -37,7 +37,8 @@ Docker Container:
     - apk update
     - apk add --update --no-cache python3 git && ln -sf python3 /usr/bin/python
     - python3 -m ensurepip
-    - pip3 install -r gitlab-ci/gitlab_release/requirements.txt
+    #- pip3 install -r gitlab-ci/gitlab_release/requirements.txt
+    - pip3 install commitizen==2.21.0 # version specified so current build works.
     - pip3 install gitlab-ci/gitlab_release/python-module/cz_nfc/.
   script: |
     docker build . \
