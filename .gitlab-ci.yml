@@ -5,13 +5,15 @@ variables:
 
 
 stages:
-    - validation
     - build
+    - validation
+    #- build
     - prepare
     - test
     - release
     - sync
     - publish
+
 
 include:
   - project: nofusscomputing/projects/gitlab-ci
@@ -21,39 +23,59 @@ include:
       - gitlab_release/.gitlab-ci.yml
       - git_push_mirror/.gitlab-ci.yml
 
-
+# docker:23
+# docker pull docker/buildx-bin:0.10.4
 Docker Container:
   stage: build
-  image: docker:latest
+  image: registry.gitlab.com/gdunstone/docker-buildx-qemu
   services:
-    - docker:19.03.12-dind
-    #- docker:latest-dind
+    #- docker:19.03.12-dind
+    - name: docker:23-dind
+      entrypoint: ["env", "-u", "DOCKER_HOST"]
+      command: ["dockerd-entrypoint.sh"]
+
   variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+    # See https://github.com/docker-library/docker/pull/166
+    DOCKER_TLS_CERTDIR: ""
+
     IMAGE_NAME: ansible-ee
+    DOCKER_TARGET_PLATFORMS: linux/amd64,linux/arm64
   before_script:
     - docker info
 #    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD 
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - apk update
-    - apk add --update --no-cache python3 git && ln -sf python3 /usr/bin/python
-    - python3 -m ensurepip
+    # - apk update
+    # - apk add --update --no-cache python3 git && ln -sf python3 /usr/bin/python
+    - export DEBIAN_FRONTEND=noninteractive
+    - apt update --allow-releaseinfo-change
+    - apt --no-install-recommends -yq install python3 git python3-pip
+    #- python3 -m ensurepip
     #- pip3 install -r gitlab-ci/gitlab_release/requirements.txt
+    - pip3 install setuptools wheel
     - pip3 install commitizen==2.21.0 # version specified so current build works.
     - pip3 install gitlab-ci/gitlab_release/python-module/cz_nfc/.
+    #- docker buildx create --use
+    - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
+    - docker buildx create --driver=docker-container --driver-opt image=moby/buildkit:v0.11.6 --use
+    - docker buildx inspect --bootstrap
+
+#    --cache-to=type=registry,ref=$CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA \
   script: |
-    docker build . \
+    docker buildx build --platform=$DOCKER_TARGET_PLATFORMS . \
       --label org.opencontainers.image.created="$(date '+%Y-%m-%d %H:%M:%S%:z')" \
       --label org.opencontainers.image.documentation="$CI_PROJECT_URL" \
       --label org.opencontainers.image.source="$CI_PROJECT_URL" \
       --label org.opencontainers.image.url="$CI_PROJECT_URL/-/releases/$(cz -n cz_nfc version --project)" \
       --label org.opencontainers.image.version="$(cz -n cz_nfc version --project)" \
       --label org.opencontainers.image.revision="$CI_COMMIT_SHA" \
-    --no-cache \
+    --push \
     --tag $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA;
 
-    docker image inspect $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA;
+    docker pull $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA;
 
-    docker push $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA;
+    docker image inspect $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA;
 
   #allow_failure: true
   rules:
@@ -65,17 +87,18 @@ Docker Container:
     #   when: on_success
     - if: '$CI_COMMIT_BRANCH != "master"'
       allow_failure: true
-      when: manual
+      #when: manual
+      when: always
     - when: never
 
 
 
 Docker Hub:
   stage: publish
-  image: docker:latest
+  image: docker:23
   services:
-    - docker:19.03.12-dind
-    #- docker:latest-dind
+    #- docker:19.03.12-dind
+    - docker:23-dind
   variables:
     IMAGE_NAME: ansible-ee
   before_script:
