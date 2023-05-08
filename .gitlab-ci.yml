@@ -1,3 +1,9 @@
+---
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  MY_PROJECT_ID: "45741845"
+
+
 stages:
     - validation
     - build
