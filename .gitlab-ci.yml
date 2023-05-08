@@ -26,8 +26,8 @@ Docker Container:
   stage: build
   image: docker:latest
   services:
-    #- docker:19.03.12-dind
-    - docker:latest-dind
+    - docker:19.03.12-dind
+    #- docker:latest-dind
   variables:
     IMAGE_NAME: ansible-ee
   before_script:
@@ -73,8 +73,8 @@ Docker Hub:
   stage: publish
   image: docker:latest
   services:
-    #- docker:19.03.12-dind
-    - docker:latest-dind
+    - docker:19.03.12-dind
+    #- docker:latest-dind
   variables:
     IMAGE_NAME: ansible-ee
   before_script:
