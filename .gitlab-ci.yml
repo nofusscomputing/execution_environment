@@ -2,9 +2,13 @@
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   MY_PROJECT_ID: "45741845"
+  DOCKER_TARGET_PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7 #linux/arm/v6
+  DOCKER_CREATED_IMAGE_NAME: ansible-ee
 
 
 stages:
+    # - build
+    # - publish
     - validation
     - build
     - prepare
@@ -12,6 +16,7 @@ stages:
     - release
     - sync
     - publish
+
 
 include:
   - project: nofusscomputing/projects/gitlab-ci
@@ -21,124 +26,180 @@ include:
       - gitlab_release/.gitlab-ci.yml
       - git_push_mirror/.gitlab-ci.yml
 
-
+# docker:23
+# docker pull docker/buildx-bin:0.10.4
 Docker Container:
   stage: build
-  image: docker:latest
+  image: registry.gitlab.com/gdunstone/docker-buildx-qemu
   services:
-    - docker:19.03.12-dind
-    #- docker:latest-dind
+    #- docker:19.03.12-dind
+    - name: docker:23-dind
+      entrypoint: ["env", "-u", "DOCKER_HOST"]
+      command: ["dockerd-entrypoint.sh"]
+
   variables:
-    IMAGE_NAME: ansible-ee
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+    # See https://github.com/docker-library/docker/pull/166
+    DOCKER_TLS_CERTDIR: ""
   before_script:
     - docker info
-#    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD 
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - apk update
-    - apk add --update --no-cache python3 git && ln -sf python3 /usr/bin/python
-    - python3 -m ensurepip
+    - export DEBIAN_FRONTEND=noninteractive
+    - apt update --allow-releaseinfo-change
+    - apt --no-install-recommends -yq install python3 git python3-pip
     #- pip3 install -r gitlab-ci/gitlab_release/requirements.txt
+    - pip3 install setuptools wheel
     - pip3 install commitizen==2.21.0 # version specified so current build works.
     - pip3 install gitlab-ci/gitlab_release/python-module/cz_nfc/.
+    - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
+    - docker buildx create --driver=docker-container --driver-opt image=moby/buildkit:v0.11.6 --use
+    - docker buildx inspect --bootstrap
+
   script: |
+
+    if [ "0$DOCKER_TARGET_PLATFORMS" != "0" ]; then
+
+      docker buildx build --platform=$DOCKER_TARGET_PLATFORMS . \
+        --label org.opencontainers.image.created="$(date '+%Y-%m-%d %H:%M:%S%:z')" \
+        --label org.opencontainers.image.documentation="$CI_PROJECT_URL" \
+        --label org.opencontainers.image.source="$CI_PROJECT_URL" \
+        --label org.opencontainers.image.url="$CI_PROJECT_URL/-/releases/$(cz -n cz_nfc version --project)" \
+        --label org.opencontainers.image.version="$(cz -n cz_nfc version --project)" \
+        --label org.opencontainers.image.revision="$CI_COMMIT_SHA" \
+      --push \
+      --tag $CI_REGISTRY_IMAGE/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_SHA;
+    
+    else
+
     docker build . \
-      --label org.opencontainers.image.created="$(date '+%Y-%m-%d %H:%M:%S%:z')" \
-      --label org.opencontainers.image.documentation="$CI_PROJECT_URL" \
-      --label org.opencontainers.image.source="$CI_PROJECT_URL" \
-      --label org.opencontainers.image.url="$CI_PROJECT_URL/-/releases/$(cz -n cz_nfc version --project)" \
-      --label org.opencontainers.image.version="$(cz -n cz_nfc version --project)" \
-      --label org.opencontainers.image.revision="$CI_COMMIT_SHA" \
-    --no-cache \
-    --tag $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA;
+        --label org.opencontainers.image.created="$(date '+%Y-%m-%d %H:%M:%S%:z')" \
+        --label org.opencontainers.image.documentation="$CI_PROJECT_URL" \
+        --label org.opencontainers.image.source="$CI_PROJECT_URL" \
+        --label org.opencontainers.image.url="$CI_PROJECT_URL/-/releases/$(cz -n cz_nfc version --project)" \
+        --label org.opencontainers.image.version="$(cz -n cz_nfc version --project)" \
+        --label org.opencontainers.image.revision="$CI_COMMIT_SHA" \
+      --no-cache \
+      --tag $CI_REGISTRY_IMAGE/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_SHA;
+    
+    docker push $CI_REGISTRY_IMAGE/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_SHA;
 
-    docker image inspect $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA;
+    fi
 
-    docker push $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA;
-
-  #allow_failure: true
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       when: never
     - if: $CI_COMMIT_TAG
       when: on_success
-    # - if: '$CI_COMMIT_BRANCH == "development" && $CI_COMMIT_TITLE =~ /Merge branch.*/'
-    #   when: on_success
+    - if: '$CI_COMMIT_BRANCH == "development" && $CI_COMMIT_TITLE =~ /Merge branch.*/'
+      when: on_success
     - if: '$CI_COMMIT_BRANCH != "master"'
       allow_failure: true
-      when: manual
+      #when: manual
+      when: always
     - when: never
 
 
 
 Docker Hub:
   stage: publish
-  image: docker:latest
+  image: docker:23
   services:
-    - docker:19.03.12-dind
-    #- docker:latest-dind
-  variables:
-    IMAGE_NAME: ansible-ee
+    #- docker:19.03.12-dind
+    - docker:23-dind
   before_script:
-    - export
-    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-    - docker pull $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA
-    - docker logout $CI_REGISTRY
-  script:
-#    - Release_TAG=$(cat $CI_PROJECT_DIR/dist/version)
-    - docker login docker.io -u $NFC_DOCKERHUB_USERNAME -p $NFC_DOCKERHUB_TOKEN
-#    - if [ "m$(echo $CI_BUILD_REF_NAME | grep rc)" == "m$CI_BUILD_REF_NAME" ]; then Branch_TAG=dev; else Branch_TAG=stable; fi
-    - echo Branch tag is $Branch_TAG
-    - docker image ls
     - |
-      DH_LATEST_TAG=dev
 
-      if [ "0$CI_COMMIT_BRANCH" == "0development" ]; then
+      docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD;
 
-        DH_LATEST_TAG=dev
+      if [ "0$DOCKER_TARGET_PLATFORMS" != "0" ]; then
 
-      elif [ "0$CI_COMMIT_TAG" != "0" ] ; then
+        for i in ${DOCKER_TARGET_PLATFORMS//,/ }
+        do
+          echo "[DEBUG] IMAGE_NAME=$DOCKER_CREATED_IMAGE_NAME";
 
-        if [ "0$CI_COMMIT_TAG" == *"rc"* ]; then
-        
-          DH_LATEST_TAG=dev
+          docker buildx imagetools inspect $CI_REGISTRY_IMAGE/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_SHA;
 
-        else
+          DOCKER_MULTI_ARCH_IMAGES=$(docker buildx imagetools inspect "registry.gitlab.com/nofusscomputing/projects/ansible/execution_environment/ansible-ee:$CI_COMMIT_SHA" --format "{{ range .Manifest.Manifests }}$CI_REGISTRY_IMAGE/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_SHA@{{print .Digest }} {{end}}")
 
-          DH_LATEST_TAG=latest
+          echo "[DEBUG] DOCKER_MULTI_ARCH_IMAGES=$DOCKER_MULTI_ARCH_IMAGES";
 
-        fi
+        done;
 
-        docker image tag $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA nofusscomputing/$IMAGE_NAME:$CI_COMMIT_TAG;
+      else
 
-        docker image ls;
-      
-        docker push nofusscomputing/$IMAGE_NAME:$CI_COMMIT_TAG;
+        docker pull $CI_REGISTRY_IMAGE/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_SHA;
 
       fi
 
-      if [ "0$DH_LATEST_TAG" != "0" ]; then
+      docker logout $CI_REGISTRY;
 
-        docker image tag $CI_REGISTRY_IMAGE/$IMAGE_NAME:$CI_COMMIT_SHA nofusscomputing/$IMAGE_NAME:$DH_LATEST_TAG;
+  script:
+    - docker login docker.io -u $NFC_DOCKERHUB_USERNAME -p $NFC_DOCKERHUB_TOKEN
+    - docker image ls
+    - |
+      DOCKER_HUB_TAG=dev
 
-        docker image ls;
+      if [ "0$CI_COMMIT_TAG" != "0" ]; then
 
-        docker push nofusscomputing/$IMAGE_NAME:$DH_LATEST_TAG;
+        DOCKER_HUB_TAG=latest
 
-      fi  
+        if [ "0$CI_COMMIT_TAG" == *"rc"* ]; then
+
+          DOCKER_HUB_TAG=dev
+
+        fi
+
+      fi
+
+      echo "[DEBUG] IMAGE_NAME=$DOCKER_CREATED_IMAGE_NAME";
+      echo "[DEBUG] DOCKER_HUB_TAG=$DOCKER_HUB_TAG";
+
+      if [ "0$DOCKER_TARGET_PLATFORMS" != "0" ]; then
+
+        echo "[DEBUG] DOCKER_MULTI_ARCH_IMAGES=$DOCKER_MULTI_ARCH_IMAGES";
+        
+        docker buildx imagetools create $DOCKER_MULTI_ARCH_IMAGES --tag nofusscomputing/$DOCKER_CREATED_IMAGE_NAME:$DOCKER_HUB_TAG;
+
+        if [ "0$DOCKER_HUB_TAG" == "0latest" ]; then
+
+          docker buildx imagetools create $DOCKER_MULTI_ARCH_IMAGES --tag nofusscomputing/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_TAG;
+
+        fi
+
+      else
+
+        docker image tag $CI_REGISTRY_IMAGE/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_SHA nofusscomputing/$DOCKER_CREATED_IMAGE_NAME:$DOCKER_HUB_TAG;
+
+        docker push nofusscomputing/$DOCKER_CREATED_IMAGE_NAME:$DOCKER_HUB_TAG;
+
+        if [ "0$DOCKER_HUB_TAG" == "0latest" ]; then
+
+          docker image tag $CI_REGISTRY_IMAGE/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_SHA nofusscomputing/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_TAG;
+
+          docker push nofusscomputing/$DOCKER_CREATED_IMAGE_NAME:$CI_COMMIT_TAG;
+
+        fi
+
+      fi
+
+    - docker logout docker.io
+
   needs: [ "Docker Container" ]
   environment:
     name: DockerHub
-    url: https://hub.docker.com/r/nofusscomputing/$IMAGE_NAME
+    url: https://hub.docker.com/r/nofusscomputing/$DOCKER_CREATED_IMAGE_NAME
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       when: never
     - if: $CI_COMMIT_TAG
       when: on_success
-    # - if: '$CI_COMMIT_BRANCH == "development" && $CI_COMMIT_TITLE =~ /Merge branch.*/'
-    #   when: on_success
+    - if: '$CI_COMMIT_BRANCH == "development" && $CI_COMMIT_TITLE =~ /Merge branch.*/'
+      when: on_success
     - if: '$CI_COMMIT_BRANCH != "master"'
       allow_failure: true
-      when: manual
+      #when: manual
+      when: always
     - when: never
 
 
