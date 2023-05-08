@@ -90,6 +90,8 @@ Docker Hub:
     - echo Branch tag is $Branch_TAG
     - docker image ls
     - |
+      DH_LATEST_TAG=dev
+
       if [ "0$CI_COMMIT_BRANCH" == "0development" ]; then
 
         DH_LATEST_TAG=dev
@@ -126,7 +128,7 @@ Docker Hub:
   needs: [ "Docker Container" ]
   environment:
     name: DockerHub
-    url: https://hub.docker.com/r/nofusscomputing/docker-mail
+    url: https://hub.docker.com/r/nofusscomputing/$IMAGE_NAME
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       when: never
