@@ -1,11 +1,15 @@
 # docker pull python:3.9.16-slim-bullseye
 # docker pull python:3.10.11-slim-bullseye
+# docker pull python:3.10-slim-bullseye
+# docker pull python:3.11-slim-bullseye
+# docker pull python:3.11-bullseye
+FROM --platform=$BUILDPLATFORM python:3.11-bullseye as scratchpad
 
-FROM python:3.9.16-slim-bullseye as scratchpad
 
-
-RUN apt update && \
-  apt install --no-install-recommends -y \
+RUN export DEBIAN_FRONTEND=noninteractive \
+  && dpkg-reconfigure debconf -f noninteractive \
+  && apt update \
+  && apt install --reinstall --no-install-recommends -yq \
     git
 
 
@@ -13,7 +17,11 @@ RUN git clone -b development --depth 1 https://gitlab.com/nofusscomputing/projec
 
 
 
-FROM python:3.9.16-slim-bullseye
+FROM --platform=$TARGETPLATFORM python:3.11-bullseye
+
+# Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
+ENV LC_ALL en_US.UTF-8
+
 
 COPY --from=scratchpad /tmp/ansible-roles/roles /etc/ansible/roles
 
@@ -32,14 +40,28 @@ LABEL \
   # org.opencontainers.image.version="{git tag}"
 
 
-RUN apt update && \
-  apt install --no-install-recommends -y \
+
+# This Black Magic exists as libc-bin was being a turd and returning errors when trying to install git, ssh.
+# see: https://askubuntu.com/questions/1339558/cant-build-dockerfile-for-arm64-due-to-libc-bin-segmentation-fault
+# see: https://github.com/dcycle/prepare-docker-buildx/blob/09057fe4879e31ee780b9e69b87f41327ca8cd8e/example/Dockerfile#L8-L10
+RUN export DEBIAN_FRONTEND=noninteractive \
+  && apt update \
+  && apt --fix-broken install \
+  && apt install -y libc-bin locales-all \
+  && apt update \
+  && apt install --reinstall --no-install-recommends -yq \
+    openssh-client \
+    git || true \
+  && dpkg --purge --force-all libc-bin \
+  && apt-get install --no-install-recommends -y \
+    openssh-client \
     git \
-    ssh && \
-  rm -rf /var/lib/apt/lists/* && \
-  mkdir -p /etc/ansible/roles && \
-  mkdir -p /etc/ansible/collections && \
-  mkdir -p /workdir
+  # End of Black Magic
+  && rm -rf /var/lib/apt/lists/* \
+  && mkdir -p /etc/ansible/roles \
+  && mkdir -p /etc/ansible/collections \
+  && mkdir -p /workdir
+
 
 WORKDIR /workdir
 
@@ -48,8 +70,9 @@ COPY ansible.cfg /etc/ansible/ansible.cfg
 
 RUN pip install --upgrade pip \
   && pip install \
-    ansible \
-    ansible-lint
+    ansible-core==2.14.5 \
+    ansible-lint==6.15.0
+
 
 RUN ansible-galaxy collection install \
     awx.awx \
