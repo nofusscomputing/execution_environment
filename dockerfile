@@ -56,6 +56,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get install --no-install-recommends -y \
     openssh-client \
     git \
+  # && apt-get install --reinstall --no-install-recommends -yq \
+  #   build-essential \
+  #   libssl-dev \
+  #   libffi-dev \
+  #   python3-dev \
+  #   cargo \
+  #   pkg-config \
   # End of Black Magic
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /etc/ansible/roles \
@@ -67,9 +74,26 @@ WORKDIR /workdir
 
 COPY ansible.cfg /etc/ansible/ansible.cfg
 
+# # see: https://github.com/pyca/cryptography/blob/998e86659ae750562ecc0bcf0eabd1828fd5c9ed/docs/installation.rst#debianubuntu
+# RUN export DEBIAN_FRONTEND=noninteractive \
+#   && apt update \
+#   && apt-get install --reinstall --no-install-recommends -yq \
+#     build-essential \
+#     libssl-dev \
+#     libffi-dev \
+#     python3-dev \
+#     cargo \
+#     pkg-config
+
 
 RUN pip install --upgrade pip \
-  && pip install \
+  && pip install --upgrade \
+    setuptools \
+    wheel
+    #setuptools-rust
+
+
+RUN pip install \
     ansible-core==2.14.5 \
     ansible-lint==6.15.0
 
