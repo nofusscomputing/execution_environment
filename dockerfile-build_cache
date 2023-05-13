@@ -1,0 +1,74 @@
+FROM --platform=$TARGETPLATFORM python:3.11-bullseye as wheelbuild
+
+ARG CI_JOB_TOKEN
+ARG CI_API_V4_URL
+ARG CI_PROJECT_ID
+
+
+ENV LC_ALL en_US.UTF-8
+ENV PATH /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.cargo/bin::~/.cargo/bin
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+  && dpkg-reconfigure debconf -f noninteractive
+
+RUN apt update \
+  && apt install --reinstall -yq \
+    git \
+    curl \
+    rustc cargo || true
+
+
+RUN mkdir -p /tmp/python_modules /tmp/python_builds
+
+
+RUN rustc --version \
+  && cargo --version
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+  && apt update \
+  && apt --fix-broken install \
+  && apt install -y libc-bin locales-all \
+  && apt update \
+  && apt install --reinstall -yq \
+    openssh-client \
+    git || true \
+  && dpkg --purge --force-all libc-bin \
+  && apt-get install -y \
+    openssh-client \
+    git
+
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+  && apt update \
+  && apt install --no-install-recommends -yq libc-bin locales-all \
+  && apt-get install --reinstall -yq \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    python3-dev \
+    cargo \
+    pkg-config || true
+
+
+RUN pip install --upgrade pip
+
+RUN pip install --upgrade \
+    setuptools \
+    wheel \
+    setuptools-rust \
+    twine
+
+COPY requirements.txt /tmp/requirements.txt
+
+RUN cd /tmp/python_modules \
+  && pip download --dest . --check-build-dependencies \
+    -r /tmp/requirements.txt
+
+
+RUN cd /tmp/python_modules \
+  # && export PATH=$PATH:~/.cargo/bin \
+  && echo "[DEBUG] PATH=$PATH" \
+  && pip wheel --wheel-dir /tmp/python_builds --find-links . *.whl
+
+
+RUN TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token python -m twine upload --verbose --skip-existing --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi /tmp/python_builds/*
