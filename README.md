@@ -42,6 +42,12 @@ links:
 
 - [Merge Requests (Pull Requests)](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests)
 
+## Documentation
+
+
+**TO DO:**
+
+point docs to gitlab-ci for docker build
 
 
 ## Contributing
@@ -53,4 +59,3 @@ For further details on contributing please refer to the [contribution guide](CON
 ## Other
 
 This repo is release under this [license](LICENSE)
-
