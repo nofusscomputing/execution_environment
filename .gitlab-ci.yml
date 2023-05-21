@@ -16,7 +16,7 @@ include:
     ref: development
     file:
       - .gitlab-ci_common.yaml
-      - type/docker-image.gitlab-ci.yaml
+      - template/docker-image.gitlab-ci.yaml
   #- template: Jobs/Container-Scanning.gitlab-ci.yml # see https://gitlab.com/gitlab-org/gitlab/-/issues/381665
 
 
