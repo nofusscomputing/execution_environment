@@ -38,6 +38,9 @@ Build/Cache Python Packages:
     - pip3 install setuptools wheel
     - pip3 install commitizen==2.21.0 # version specified so current build works.
     - pip3 install gitlab-ci/gitlab_release/python-module/cz_nfc/.
+      # see: https://gitlab.com/gitlab-org/gitlab-runner/-/merge_requests/1861 
+      # on why this `docker run` is required. without it multiarch support doesnt work.
+    - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
     - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
     - docker buildx create --driver=docker-container --driver-opt image=moby/buildkit:v0.11.6 --use
     - docker buildx inspect --bootstrap
