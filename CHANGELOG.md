@@ -1,3 +1,11 @@
+## 0.1.1rc0 (2023-05-23)
+
+### Bug Fixes
+
+- **ci**: [f93ef764](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/f93ef764ff07c4c8fa7582553a667eeb6d628de1) - ensure binfmt initialized [ [!7](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/7) ]
+- **ci**: [f35259f7](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/f35259f796516e235bd8060c3ccfd058514343aa) - update to new template path [ [!7](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/7) ]
+- **readme**: [d9df60e2](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/d9df60e27f75004ce05ccb495d970c32325cb712) - typo in dev branch badge [ [!7](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/7) ]
+
 ## 0.1.0 (2023-05-15)
 
 ### Bug Fixes
