@@ -13,7 +13,10 @@ RUN apt update \
     git || true
 
 
-RUN git clone -b development --depth 1 https://gitlab.com/nofusscomputing/projects/ansible-roles.git /tmp/ansible-roles 
+RUN git clone -b development --depth 1 https://gitlab.com/nofusscomputing/projects/ansible-roles.git /tmp/ansible-roles \
+  && cd /tmp/ansible-roles \
+  && git submodule init
+
 
 
 
