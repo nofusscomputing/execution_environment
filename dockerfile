@@ -82,4 +82,6 @@ RUN pip install --index-url https://gitlab.com/api/v4/projects/45741845/packages
 
 RUN ansible-galaxy collection install \
     awx.awx \
-    kubernetes.core
+    kubernetes.core \
+    # community.general.gitlab_*
+    community.general
