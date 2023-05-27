@@ -15,8 +15,9 @@ RUN apt update \
 
 RUN git clone -b development --depth 1 https://gitlab.com/nofusscomputing/projects/ansible-roles.git /tmp/ansible-roles \
   && cd /tmp/ansible-roles \
-  && git submodule update --init \
-  && git clone -b development --depth 1 https://gitlab.com/nofusscomputing/projects/ansible/ansible_playbooks.git /tmp/ansible_playbooks \
+  && git submodule update --init
+
+RUN git clone -b development --depth 1 https://gitlab.com/nofusscomputing/projects/ansible/ansible_playbooks.git /tmp/ansible_playbooks \
   && cd /tmp/ansible_playbooks \
   && git submodule update --init
 
