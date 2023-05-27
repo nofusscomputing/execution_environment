@@ -17,6 +17,10 @@ RUN git clone -b development --depth 1 https://gitlab.com/nofusscomputing/projec
   && cd /tmp/ansible-roles \
   && git submodule update --init
 
+RUN git clone -b development --depth 1 https://gitlab.com/nofusscomputing/projects/ansible/ansible_playbooks.git /tmp/ansible_playbooks \
+  && cd /tmp/ansible_playbooks \
+  && git submodule update --init
+
 
 
 
@@ -25,8 +29,13 @@ FROM --platform=$TARGETPLATFORM python:3.11-bullseye
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
 ENV LC_ALL en_US.UTF-8
 
+ENV ANSIBLE_PLAYBOOK_DIR=/etc/ansible/playbooks
+
 
 COPY --from=fetch-ansible-roles /tmp/ansible-roles/roles /etc/ansible/roles
+
+COPY --from=fetch-ansible-roles /tmp/ansible_playbooks /etc/ansible/playbooks
+
 
 # Ref: https://github.com/opencontainers/image-spec/blob/d86384efdb8c30770a92415c100f57a9bffbb64e/annotations.md
 LABEL \
