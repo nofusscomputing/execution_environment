@@ -10,13 +10,11 @@ variables:
   DOCKER_IMAGE_PUBLISH_URL: https://hub.docker.com/r/nofusscomputing/$DOCKER_IMAGE_PUBLISH_NAME
 
 
-
 include:
   - project: nofusscomputing/projects/gitlab-ci
     ref: development
     file:
-      - .gitlab-ci_common.yaml
-      - template/docker-image.gitlab-ci.yaml
+      - template/automagic.gitlab-ci.yaml
   #- template: Jobs/Container-Scanning.gitlab-ci.yml # see https://gitlab.com/gitlab-org/gitlab/-/issues/381665
 
 
