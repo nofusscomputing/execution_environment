@@ -2,3 +2,11 @@
 	path = gitlab-ci
 	url = https://gitlab.com/nofusscomputing/projects/gitlab-ci.git
 	branch = development
+[submodule "ansible-roles"]
+	path = includes/etc/ansible/roles
+	url = https://gitlab.com/nofusscomputing/projects/ansible/ansible-roles.git
+	branch = development
+[submodule "ansible_playbooks"]
+	path = includes/etc/ansible/playbooks
+	url = https://gitlab.com/nofusscomputing/projects/ansible/ansible_playbooks.git
+	branch = development
