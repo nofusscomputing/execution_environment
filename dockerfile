@@ -62,4 +62,6 @@ RUN ansible-galaxy collection install \
     awx.awx \
     kubernetes.core \
     # community.general.gitlab_*
-    community.general
+    community.general \
+    # ansible.posix.authorized_key for SSH
+    ansible.posix
