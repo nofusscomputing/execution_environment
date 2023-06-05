@@ -64,4 +64,6 @@ RUN ansible-galaxy collection install \
     # community.general.gitlab_*
     community.general \
     # ansible.posix.authorized_key for SSH
-    ansible.posix
+    ansible.posix \
+    # docker managment
+    community.docker
