@@ -44,7 +44,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && mkdir -p /etc/ansible/roles \
   && mkdir -p /etc/ansible/collections \
   && mkdir -p /workdir \
-  && apt list --installed
+  && apt list --installed \
+    # see issue https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/9 for following two lines
+  && rm /usr/bin/python3 \
+  && ln -s /usr/local/bin/python3.11 /usr/bin/python3
 
 
 WORKDIR /workdir
