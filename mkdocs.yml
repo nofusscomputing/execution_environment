@@ -1,0 +1,31 @@
+INHERIT: website-template/mkdocs.yml
+
+docs_dir: 'docs'
+
+repo_name: Ansible-EE
+repo_url: https://gitlab.com/nofusscomputing/projects/ansible/execution_environment
+edit_uri: '/-/ide/project/nofusscomputing/projects/ansible/execution_environment/edit/development/-/docs/'
+
+nav:
+- Home: index.md
+
+- Articles: 
+
+  - articles/index.md
+
+- Projects: 
+
+  - projects/index.md
+
+  - Ansible Roles:
+
+    - Execution Environment:
+
+      - projects/execution_environment/index.md
+
+- Operations: 
+
+  - operations/index.md
+
+- Contact Us: contact.md
+

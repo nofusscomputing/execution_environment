@@ -10,3 +10,7 @@
 	path = includes/etc/ansible/playbooks
 	url = https://gitlab.com/nofusscomputing/projects/ansible/ansible_playbooks.git
 	branch = development
+[submodule "website-template"]
+	path = website-template
+	url = https://gitlab.com/nofusscomputing/infrastructure/website-template.git
+	branch = development
