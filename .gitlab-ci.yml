@@ -1,4 +1,5 @@
 ---
+
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   MY_PROJECT_ID: "45741845"
@@ -17,7 +18,8 @@ include:
       - template/automagic.gitlab-ci.yaml
   #- template: Jobs/Container-Scanning.gitlab-ci.yml # see https://gitlab.com/gitlab-org/gitlab/-/issues/381665
 
-
+.MKDocs_Build:
+  image: python:3.11-buster
 
 Build/Cache Python Packages:
   stage: build
