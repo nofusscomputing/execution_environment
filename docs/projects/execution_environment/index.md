@@ -21,7 +21,7 @@ The docker container is built from the python-slim image with a few extra items 
 
 Included features are only included if a role that we create requires it. Currently we use the pythonx.xx-{debian release} as abase image which makes available the debian packages should you require additional features/sofware not specified below.
 
-- custom [ansible.cfg](#ansible.cfg)
+- custom [ansible.cfg](#ansible%20config%20file)
 
 - environmental variable `ANSIBLE_PLAYBOOK_DIR` set pointing to `/etc/ansible/playbooks`.
 
@@ -66,7 +66,7 @@ We use the following tags for our docker containers
 
 ## Dockerfile
 
-``` dockerfile title="dockerfile" linnums="1"
+``` dockerfile title="dockerfile" linenums="1"
 
 --8<-- "dockerfile"
 
@@ -74,18 +74,18 @@ We use the following tags for our docker containers
 
 This dockerfile is only used to build the python packages for cross platform compilation.
 
-``` dockerfile title="dockerfile-build_cache" linnums="1"
+``` dockerfile title="dockerfile-build_cache" linenums="1"
 
 --8<-- "dockerfile-build_cache"
 
 ```
 
 
-## ansible.cfg
+## ansible config file
 
 This ansible config file is included within this docker container.
 
-``` dockerfile title="/etc/ansible/ansible.cfg" linnums="1"
+``` ini title="/etc/ansible/ansible.cfg" linenums="1"
 
 --8<-- "includes/etc/ansible/ansible.cfg"
 
