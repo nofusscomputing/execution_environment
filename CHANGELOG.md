@@ -1,3 +1,14 @@
+## 0.1.1rc2 (2023-06-08)
+
+### Continious Integration
+
+- [f5c4b33c](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/f5c4b33c696451629d8f521a47267ce30fee7e91) - mkdocs temp newer image [ [!29](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/29) [#8](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/8) ]
+
+### Documentaton / Guides
+
+- [56b6e304](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/56b6e304bbdaa9a631a18ac95ffdfe95b7fef307) - fix typo [ [!29](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/29) [#8](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/8) ]
+- [b8b9348e](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/b8b9348e3061345588c51b75b30d22ece3984c56) - added initial docs [ [!29](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/29) [#8](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/8) ]
+
 ## 0.1.1rc1 (2023-06-05)
 
 ### Bug Fixes
