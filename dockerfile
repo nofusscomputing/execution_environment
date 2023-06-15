@@ -1,29 +1,13 @@
-FROM --platform=$BUILDPLATFORM python:3.11-bullseye as fetch-ansible-roles
-
-
-ENV LC_ALL en_US.UTF-8
-
-
-RUN export DEBIAN_FRONTEND=noninteractive \
-  && dpkg-reconfigure debconf -f noninteractive
-
-
-RUN apt update \
-  && apt install --reinstall -yq \
-    git || true
-
-
-RUN git clone -b development --depth 1 https://gitlab.com/nofusscomputing/projects/ansible-roles.git /tmp/ansible-roles 
-
-
-
 FROM --platform=$TARGETPLATFORM python:3.11-bullseye
 
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
 ENV LC_ALL en_US.UTF-8
 
+ENV ANSIBLE_PLAYBOOK_DIR=/etc/ansible/playbooks
 
-COPY --from=fetch-ansible-roles /tmp/ansible-roles/roles /etc/ansible/roles
+
+COPY includes /
+
 
 # Ref: https://github.com/opencontainers/image-spec/blob/d86384efdb8c30770a92415c100f57a9bffbb64e/annotations.md
 LABEL \
@@ -60,13 +44,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && mkdir -p /etc/ansible/roles \
   && mkdir -p /etc/ansible/collections \
   && mkdir -p /workdir \
-  && apt list --installed
+  && apt list --installed \
+    # see issue https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/9 for following two lines
+  && rm /usr/bin/python3 \
+  && ln -s /usr/local/bin/python3.11 /usr/bin/python3
 
 
 WORKDIR /workdir
-
-
-COPY ansible.cfg /etc/ansible/ansible.cfg
 
 
 COPY requirements.txt /tmp/requirements.txt
@@ -79,4 +63,10 @@ RUN pip install --index-url https://gitlab.com/api/v4/projects/45741845/packages
 
 RUN ansible-galaxy collection install \
     awx.awx \
-    kubernetes.core
+    kubernetes.core \
+    # community.general.gitlab_*
+    community.general \
+    # ansible.posix.authorized_key for SSH
+    ansible.posix \
+    # docker managment
+    community.docker

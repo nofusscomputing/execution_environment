@@ -1,6 +1,6 @@
 ---
+
 variables:
-  GIT_SUBMODULE_STRATEGY: recursive
   MY_PROJECT_ID: "45741845"
   GIT_SYNC_URL: "https://$GITHUB_USERNAME_ROBOT:$GITHUB_TOKEN_ROBOT@github.com/NoFussComputing/execution_environment.git"
   
@@ -8,18 +8,17 @@ variables:
   DOCKER_IMAGE_PUBLISH_NAME: 'ansible-ee'
   DOCKER_IMAGE_PUBLISH_REGISTRY: docker.io/nofusscomputing
   DOCKER_IMAGE_PUBLISH_URL: https://hub.docker.com/r/nofusscomputing/$DOCKER_IMAGE_PUBLISH_NAME
-
-
+  PAGES_ENVIRONMENT_PATH: projects/execution_environment/
 
 include:
   - project: nofusscomputing/projects/gitlab-ci
     ref: development
     file:
-      - .gitlab-ci_common.yaml
-      - type/docker-image.gitlab-ci.yaml
+      - template/automagic.gitlab-ci.yaml
   #- template: Jobs/Container-Scanning.gitlab-ci.yml # see https://gitlab.com/gitlab-org/gitlab/-/issues/381665
 
-
+.MKDocs_Build:
+  image: python:3.11-buster
 
 Build/Cache Python Packages:
   stage: build
@@ -38,6 +37,9 @@ Build/Cache Python Packages:
     - pip3 install setuptools wheel
     - pip3 install commitizen==2.21.0 # version specified so current build works.
     - pip3 install gitlab-ci/gitlab_release/python-module/cz_nfc/.
+      # see: https://gitlab.com/gitlab-org/gitlab-runner/-/merge_requests/1861 
+      # on why this `docker run` is required. without it multiarch support doesnt work.
+    - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
     - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
     - docker buildx create --driver=docker-container --driver-opt image=moby/buildkit:v0.11.6 --use
     - docker buildx inspect --bootstrap
