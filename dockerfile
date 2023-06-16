@@ -39,7 +39,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get install --no-install-recommends -y \
     openssh-client \
     git \
-  # End of Black Magic
+    sshpass \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /etc/ansible/roles \
   && mkdir -p /etc/ansible/collections \
