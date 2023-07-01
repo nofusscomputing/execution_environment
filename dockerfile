@@ -32,7 +32,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && dpkg --extract ./libc-bin_*.deb /tmp/deb \
   && cp /tmp/deb/sbin/ldconfig /sbin/ \
   && rm -Rf /tmp/deb \
-  && rm libc-bin_*.deb
+  && rm libc-bin_*.deb \
   && apt-get install --reinstall \
     libc-bin \
     # EoF fixing dpkg ldconfig not found error
