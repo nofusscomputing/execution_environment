@@ -42,6 +42,8 @@ RUN apt update \
     locales \
   && sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen \
   && locale-gen \
+  && apt list --upgradable \
+  && apt upgrade --no-install-recommends -y \
   && apt-get install --no-install-recommends -y \
     openssh-client \
     git \
