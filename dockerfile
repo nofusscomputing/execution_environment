@@ -3,6 +3,8 @@ FROM --platform=$TARGETPLATFORM python:3.11-bullseye
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
 ENV LC_ALL en_US.UTF-8
 
+ENV DEBIAN_FRONTEND noninteractive
+
 ENV ANSIBLE_PLAYBOOK_DIR=/etc/ansible/playbooks
 
 
@@ -23,23 +25,29 @@ LABEL \
   # org.opencontainers.image.version="{git tag}"
 
 
-
-# This Black Magic exists as libc-bin was being a turd and returning errors when trying to install git, ssh.
-# see: https://askubuntu.com/questions/1339558/cant-build-dockerfile-for-arm64-due-to-libc-bin-segmentation-fault
-# see: https://github.com/dcycle/prepare-docker-buildx/blob/09057fe4879e31ee780b9e69b87f41327ca8cd8e/example/Dockerfile#L8-L10
-RUN export DEBIAN_FRONTEND=noninteractive \
-  && apt update \
-  && apt --fix-broken install \
-  && apt install -y libc-bin locales-all \
-  && apt update \
-  && apt install --reinstall --no-install-recommends -yq \
-    openssh-client \
-    git || true \
-  && dpkg --purge --force-all libc-bin \
+RUN apt update \
+    # SoF fixing dpkg ldconfig not found error
+  && cd /tmp \
+  && apt-get download \
+    libc-bin \
+  && dpkg --extract ./libc-bin_*.deb /tmp/deb \
+  && cp /tmp/deb/sbin/ldconfig /sbin/ \
+  && rm -Rf /tmp/deb \
+  && rm libc-bin_*.deb \
+  && apt-get install --reinstall \
+    libc-bin \
+    # EoF fixing dpkg ldconfig not found error
+    # Set Locale to en_US as ansible requires a locale for it to function without chucking a tantrum!!
+  && apt install -y \
+    locales \
+  && sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen \
+  && locale-gen \
+  && apt list --upgradable \
+  && apt upgrade --no-install-recommends -y \
   && apt-get install --no-install-recommends -y \
     openssh-client \
     git \
-  # End of Black Magic
+    sshpass \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /etc/ansible/roles \
   && mkdir -p /etc/ansible/collections \
@@ -69,4 +77,5 @@ RUN ansible-galaxy collection install \
     # ansible.posix.authorized_key for SSH
     ansible.posix \
     # docker managment
-    community.docker
+    community.docker \
+    community.mysql
