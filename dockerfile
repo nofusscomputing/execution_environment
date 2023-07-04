@@ -77,4 +77,5 @@ RUN ansible-galaxy collection install \
     # ansible.posix.authorized_key for SSH
     ansible.posix \
     # docker managment
-    community.docker
+    community.docker \
+    community.mysql
