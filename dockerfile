@@ -36,6 +36,11 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get install --reinstall \
     libc-bin \
     # EoF fixing dpkg ldconfig not found error
+    # Set Locale to en_US as ansible requires a locale for it to function without chucking a tantrum!!
+  && apt install -y \
+    locales \
+  && sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen \
+  && locale-gen \
   && apt-get install --no-install-recommends -y \
     openssh-client \
     git \
