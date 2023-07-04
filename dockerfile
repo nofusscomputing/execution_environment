@@ -3,6 +3,8 @@ FROM --platform=$TARGETPLATFORM python:3.11-bullseye
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
 ENV LC_ALL en_US.UTF-8
 
+ENV DEBIAN_FRONTEND noninteractive
+
 ENV ANSIBLE_PLAYBOOK_DIR=/etc/ansible/playbooks
 
 
@@ -23,8 +25,7 @@ LABEL \
   # org.opencontainers.image.version="{git tag}"
 
 
-RUN export DEBIAN_FRONTEND=noninteractive \
-  && apt update \
+RUN apt update \
     # SoF fixing dpkg ldconfig not found error
   && cd /tmp \
   && apt-get download \
