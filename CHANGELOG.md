@@ -1,3 +1,18 @@
+## 0.2.0 (2023-07-04)
+
+### Bug Fixes
+
+- **locale**: [ed62936d](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/ed62936d697968e7721e130045250f3926e34923) - Tanty thrown by ansibe now fixed [ [!81](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/81) [#12](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/12) ]
+- **dockerfile**: [6a108735](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/6a1087350720f46d0d5cec73737a9d05b1e0d3e5) - typo in command
+- **container**: [9705f44c](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/9705f44c8ac379268ab3e027b130ee438d0c8c89) - correct the dpkg ldconfig error [ [#12](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/12) ]
+
+### Features
+
+- **collection**: [823c9c79](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/823c9c79494517641301201c213a712021364f81) - install community.mysql collection [ [!81](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/81) ]
+- **security**: [1a1dc118](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/1a1dc118bb358eac44faf100a2af655180b329e5) - update system packages during build [ [!81](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/81) ]
+- **env_var**: [a430dc64](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/a430dc6400d53f4c494fd8f6ab47484103833168) - new env var of DEBIAN_FRONTEND noninteractive [ [!81](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/81) ]
+- **software**: [0c05490b](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/0c05490bd9c11924c16a6341bdaa1f8ed1d83c58) - install sshpass for ssh client usage [ [#12](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/12) ]
+
 ## 0.1.1 (2023-06-15)
 
 ## 0.1.1rc5 (2023-06-15)
