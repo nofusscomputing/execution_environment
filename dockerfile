@@ -48,14 +48,15 @@ RUN apt update \
     openssh-client \
     git \
     sshpass \
-  && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /etc/ansible/roles \
   && mkdir -p /etc/ansible/collections \
   && mkdir -p /workdir \
   && apt list --installed \
     # see issue https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/9 for following two lines
-  && rm /usr/bin/python3 \
-  && ln -s /usr/local/bin/python3.11 /usr/bin/python3
+  && apt remove -y \
+    python3* \
+    libpython3* \
+  && rm -rf /var/lib/apt/lists/*
 
 
 WORKDIR /workdir
