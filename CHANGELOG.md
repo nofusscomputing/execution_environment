@@ -1,3 +1,9 @@
+## 0.2.1 (2023-09-02)
+
+### Bug Fixes
+
+- **python**: [40e46cd2](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/40e46cd22e6dab013fd04b3c6f479e143c1b424c) - removed python3.9 as it as causing issues with 3.11 [ [!89](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/89) [#9](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/9) ]
+
 ## 0.2.0 (2023-07-04)
 
 ### Bug Fixes
