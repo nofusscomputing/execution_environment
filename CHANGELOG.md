@@ -1,3 +1,9 @@
+## 0.2.2 (2023-10-16)
+
+### Bug Fixes
+
+- **execution_environment**: [26fb79d4](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/26fb79d44cc06eb50ec750a5d82bab158af5cd11) - ansible runner required [ [!93](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/93) ]
+
 ## 0.2.1 (2023-09-02)
 
 ### Bug Fixes
