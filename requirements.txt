@@ -1,5 +1,6 @@
 ansible-core==2.14.5
 ansible-lint==6.15.0
+ansible-runner==2.3.4
 
 # Required for community.general.gitlab_*
 python_gitlab==3.14.0
