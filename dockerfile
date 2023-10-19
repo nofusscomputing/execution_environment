@@ -48,6 +48,8 @@ RUN apt update \
     openssh-client \
     git \
     sshpass \
+    postgresql-common \
+    postgresql-client \
   && mkdir -p /etc/ansible/roles \
   && mkdir -p /etc/ansible/collections \
   && mkdir -p /workdir \
