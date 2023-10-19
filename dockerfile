@@ -50,6 +50,7 @@ RUN apt update \
     sshpass \
     postgresql-common \
     postgresql-client \
+    mariadb-client \
   && mkdir -p /etc/ansible/roles \
   && mkdir -p /etc/ansible/collections \
   && mkdir -p /workdir \
