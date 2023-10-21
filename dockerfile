@@ -1,3 +1,5 @@
+ARG TARGETPLATFORM=linux/amd64
+
 FROM --platform=$TARGETPLATFORM python:3.11-bullseye
 
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
@@ -6,6 +8,8 @@ ENV LC_ALL en_US.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV ANSIBLE_PLAYBOOK_DIR=/etc/ansible/playbooks
+
+ENV ANSIBLE_COLLECTIONS_PATHS=/etc/ansible/collections
 
 
 COPY includes /
@@ -48,6 +52,9 @@ RUN apt update \
     openssh-client \
     git \
     sshpass \
+    postgresql-common \
+    postgresql-client \
+    mariadb-client \
   && mkdir -p /etc/ansible/roles \
   && mkdir -p /etc/ansible/collections \
   && mkdir -p /workdir \
@@ -71,12 +78,13 @@ RUN pip install --index-url https://gitlab.com/api/v4/projects/45741845/packages
 
 
 RUN ansible-galaxy collection install \
-    awx.awx \
-    kubernetes.core \
-    # community.general.gitlab_*
-    community.general \
     # ansible.posix.authorized_key for SSH
     ansible.posix \
+    awx.awx \
+    # community.general.gitlab_*
+    community.general \
     # docker managment
     community.docker \
-    community.mysql
+    community.mysql \
+    community.postgresql \
+    kubernetes.core
