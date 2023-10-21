@@ -1,3 +1,5 @@
+ARG TARGETPLATFORM=linux/amd64
+
 FROM --platform=$TARGETPLATFORM python:3.11-bullseye
 
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
