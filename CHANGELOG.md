@@ -1,3 +1,13 @@
+## 0.3.0 (2023-10-21)
+
+### Features
+
+- **image**: [b8aea8f8](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/b8aea8f847d0d0d6b176991cad167bc6ea6f9d14) - default to amd64 as target platform [ [!95](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/95) ]
+- **image**: [03f00a92](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/03f00a928906e50f580a1e8f2ca3f3b79089e3c3) - var ANSIBLE_COLLECTIONS_PATHS set to /etc/ansible/collections [ [!95](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/95) ]
+- **image**: [e38f0e58](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/e38f0e58b3d6c4e537186f428a6ff372b4bdc07c) - add mysql client [ [!95](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/95) ]
+- **image**: [a34d0736](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/a34d0736714a0c487806872b78dcb78474c621ae) - add postgresclient [ [!95](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/95) ]
+- **collection**: [03342e41](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/03342e41c591f58c214f1c8754a069362618515d) - add community.postgresql [ [!95](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/95) ]
+
 ## 0.2.2 (2023-10-16)
 
 ### Bug Fixes
