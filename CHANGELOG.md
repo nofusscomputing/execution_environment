@@ -1,3 +1,9 @@
+## 0.4.0rc2 (2023-11-05)
+
+### Features
+
+- **ansible-roles**: [7cb057b1](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/7cb057b120ac5c5e14c655bf5dc9ab955967a84b) - updated submodule ansible-roles [ [!105](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/105) ]
+
 ## 0.4.0rc1 (2023-11-05)
 
 ### Features
