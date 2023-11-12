@@ -1,3 +1,15 @@
+## 0.4.0 (2023-11-12)
+
+### Features
+
+- **ansible-roles**: [38fe2703](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/38fe270382867683dc51d1f4e3565cd0d314d5da) - updated submodule ansible-roles [ [!110](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/110) ]
+- **ansible-roles**: [0aac5d6f](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/0aac5d6fd824ee1c7d9326613f296e48e2898f6e) - updated submodule ansible-roles [ [!109](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/109) ]
+- **ansible-roles**: [01ae4c92](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/01ae4c92222c8b0b34a2f612ae6d58fc67da750f) - updated submodule ansible-roles [ [!108](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/108) ]
+- **ansible-roles**: [ba5019e9](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/ba5019e9e36bb02992d6b3d1dc415fee04100194) - updated submodule ansible-roles [ [!107](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/107) ]
+- **ansible-roles**: [4a491742](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/4a4917427c17e748ce7c3b37473e4f2f9336937e) - updated submodule ansible-roles [ [!107](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/107) ]
+- **ansible-roles**: [3498651d](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/3498651ded5f8662aef6cebedb2477600281d06f) - updated submodule ansible-roles [ [!106](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/106) ]
+- **ansible_playbooks**: [2f319813](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/2f319813f3922a856c31b8570d9897b30fc29652) - updated submodule ansible_playbooks [ [!106](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/106) ]
+
 ## 0.4.0rc2 (2023-11-05)
 
 ### Features
