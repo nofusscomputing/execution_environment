@@ -1,5 +1,3 @@
-ARG TARGETPLATFORM=linux/amd64
-
 
 FROM --platform=$TARGETPLATFORM quay.io/ansible/receptor:devel as receptor
 
