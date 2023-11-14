@@ -1,5 +1,9 @@
 ARG TARGETPLATFORM=linux/amd64
 
+
+FROM --platform=$TARGETPLATFORM quay.io/ansible/receptor:devel as receptor
+
+
 FROM --platform=$TARGETPLATFORM python:3.11-bullseye
 
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
@@ -71,8 +75,10 @@ WORKDIR /workdir
 
 COPY requirements.txt /tmp/requirements.txt
 
+COPY --from=receptor /usr/bin/receptor /usr/bin/receptor
 
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip; \
+  mkdir -p /var/run/receptor
 
 RUN pip install --index-url https://gitlab.com/api/v4/projects/45741845/packages/pypi/simple -r /tmp/requirements.txt
 
