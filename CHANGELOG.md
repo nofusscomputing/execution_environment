@@ -1,3 +1,18 @@
+## 0.5.0 (2023-11-14)
+
+### Bug Fixes
+
+- **multi_arch_cpu**: [102c50df](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/102c50df52d398ead8415877fd2067436a1ee8d1) - ensure multi arch images are build [ [!116](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/116) ]
+
+### Features
+
+- **arm32**: [dbddb3b4](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/dbddb3b4334857733d3f1b044f64ea8c745bab7c) - remove arm 32-bit support [ [!116](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/116) ]
+- **container**: [8e96e160](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/8e96e160739090d428f482c160bc82e9855b865f) - add ansible receptor [ [!114](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/114) [#17](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/17) ]
+- **ansible**: [2d54a3cc](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/2d54a3cc28280383b0879349d9607775fe9892c5) - add community.dns module [ [!114](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/114) ]
+- **ansible-roles**: [005a2932](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/005a2932886cf57685d9d7764615cafae6b4a456) - updated submodule ansible-roles [ [!113](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/113) ]
+- **ansible-roles**: [db366e7b](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/db366e7b8ea7ecff10942df89f7cac8bede2e62f) - updated submodule ansible-roles [ [!113](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/113) ]
+- **ansible-roles**: [28fbff63](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/28fbff63a60ccbfa24e600f3c3c93b409e8dba2b) - updated submodule ansible-roles [ [!112](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/112) ]
+
 ## 0.4.0 (2023-11-12)
 
 ### Features
