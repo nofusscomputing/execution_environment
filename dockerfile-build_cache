@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM python:3.11-bullseye as wheelbuild
+FROM --platform=$TARGETPLATFORM python:3.11-slim-bookworm as wheelbuild
 
 ARG CI_JOB_TOKEN
 ARG CI_API_V4_URL
