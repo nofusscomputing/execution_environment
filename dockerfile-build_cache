@@ -15,7 +15,8 @@ RUN apt update \
   && apt install --reinstall -yq \
     git \
     curl \
-    rustc cargo || true
+    rustc cargo \
+    libpq-dev || true
 
 
 RUN mkdir -p /tmp/python_modules /tmp/python_builds
