@@ -83,13 +83,13 @@ RUN pip install --index-url https://gitlab.com/api/v4/projects/45741845/packages
 
 
 RUN ansible-galaxy collection install \
-    awx.awx \
+    awx.awx==23.5.0 \
     # ansible.posix.authorized_key for SSH
-    ansible.posix \
-    community.dns \
+    ansible.posix==1.5.4 \
+    community.dns==2.6.4 \
     # docker managment
-    community.docker \
+    community.docker==3.4.11 \
     # community.general.gitlab_*
-    community.general \
-    community.mysql \
-    kubernetes.core
+    community.general==8.1.0 \
+    community.mysql==3.8.0 \
+    kubernetes.core==3.0.0
