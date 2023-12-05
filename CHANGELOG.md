@@ -1,3 +1,9 @@
+## 0.7.1 (2023-12-05)
+
+### Bug Fixes
+
+- **galaxy**: [e5ea61d5](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/e5ea61d58f0b1a8336709652d00e643e8833d785) - specify versions as newest version is not installed [ [!133](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/133) ]
+
 ## 0.7.0 (2023-12-05)
 
 ### Bug Fixes
