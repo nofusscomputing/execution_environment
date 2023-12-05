@@ -1,3 +1,18 @@
+## 0.7.0 (2023-12-05)
+
+### Bug Fixes
+
+- **build_cache**: [16cec6c2](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/16cec6c21b627d6b09d1b78de6263756f28ba1da) - add pycopg missing build dep [ [!132](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/132) ]
+- **build_cache**: [7fafa8f1](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/7fafa8f1c9a12c346562503bb26607f7ade8740a) - add pycopg missing build dep [ [!131](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/131) ]
+
+### Features
+
+- **ansible**: [4ba258af](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/4ba258aff4ac16b22b26742c619c270551e9c205) - upgrade to 2.16.0 [ [!128](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/128) ]
+- **ansible_playbooks**: [5bddf0e0](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/5bddf0e0a365718b1ecb51c660a43ee9eef6d725) - updated submodule ansible_playbooks [ [!127](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/127) ]
+- **ansible_playbooks**: [31c43270](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/31c4327064f06767d8f032c2d27fd9420e718cf5) - updated submodule ansible_playbooks [ [!127](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/127) ]
+- **ansible-roles**: [ffc9e0c5](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/ffc9e0c5768f5f4dd6d28216989a1e8540c9538f) - updated submodule ansible-roles [ [!126](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/126) ]
+- **ansible-roles**: [8eebdca9](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/8eebdca9e936b1abc831e239a054271165e08211) - updated submodule ansible-roles [ [!125](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/125) ]
+
 ## 0.6.0 (2023-11-30)
 
 ### Features
