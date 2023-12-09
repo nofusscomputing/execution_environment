@@ -92,4 +92,5 @@ RUN ansible-galaxy collection install \
     # community.general.gitlab_*
     community.general==8.1.0 \
     community.mysql==3.8.0 \
+    community.postgresql==3.2.0 \
     kubernetes.core==3.0.0
