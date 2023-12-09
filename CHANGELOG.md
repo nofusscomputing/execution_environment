@@ -1,3 +1,9 @@
+## 0.8.1 (2023-12-09)
+
+### Bug Fixes
+
+- **collection**: [b9a0e611](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/b9a0e611366d75de0f6d48bda4d91d06898935b1) - add missing postgres [ [!150](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/150) [!18](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/18) ]
+
 ## 0.8.0 (2023-12-08)
 
 ### Features
