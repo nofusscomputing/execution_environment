@@ -1,3 +1,9 @@
+## 0.9.0 (2023-12-09)
+
+### Features
+
+- **ansible-roles**: [63911dfb](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/63911dfb3e481642465ab4764050dd3f96732d89) - updated submodule ansible-roles
+
 ## 0.8.1 (2023-12-09)
 
 ### Bug Fixes
