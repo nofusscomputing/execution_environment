@@ -1,3 +1,11 @@
+## 0.10.0 (2024-01-01)
+
+### Features
+
+- **ansible-roles**: [c7259d10](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/c7259d10da7e0b002758c95a899b4f88c0405459) - updated submodule ansible-roles [ [!176](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/176) ]
+- **ansible_playbooks**: [66a039d2](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/66a039d203b89888afdddaecef033a7d85d36083) - updated submodule ansible_playbooks [ [!175](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/175) ]
+- **ansible_playbooks**: [0553945e](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/0553945e3bf6cd2ebbffcb6ef4554fe4b94f764e) - updated submodule ansible_playbooks [ [!174](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/174) ]
+
 ## 0.10.0rc0 (2023-12-20)
 
 ### Features
