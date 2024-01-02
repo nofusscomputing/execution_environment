@@ -86,6 +86,7 @@ RUN ansible-galaxy collection install \
     awx.awx==23.5.0 \
     # ansible.posix.authorized_key for SSH
     ansible.posix==1.5.4 \
+    ansible.utils=3.0.0 \
     community.dns==2.6.4 \
     # docker managment
     community.docker==3.4.11 \
