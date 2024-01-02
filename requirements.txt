@@ -1,7 +1,7 @@
 ansible-core==2.16.1
 ansible-lint==6.15.0
 ansible-runner==2.3.4
-
+awxkit==23.5.1
 # Required for community.general.gitlab_*
 python_gitlab==3.14.0
 # community.postgresql
@@ -10,3 +10,5 @@ psycopg2==2.9.9
 PyMySQL==1.1.0
 
 dnspython
+
+xmltodict==0.13.0
