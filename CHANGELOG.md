@@ -1,3 +1,15 @@
+## 0.11.0rc0 (2024-01-02)
+
+### Bug Fixes
+
+- **collections**: [2ec5e230](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/2ec5e2306707d4c5c1d0dcc1062afa1ee0f00857) - fix utils version decalaration [ [!179](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/179) ]
+
+### Features
+
+- **image**: [28fc8b3c](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/28fc8b3c658a973e1294e9fb7eb9c53e1e52eaf6) - add awxkit [ [!179](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/179) ]
+- **image**: [c29bad5d](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/c29bad5daa6ec4242b14e2873ddee34048b4240a) - add ansible module ansible.utils [ [!179](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/179) ]
+- **ansible_playbooks**: [8ebe2090](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/8ebe20907788b66d6009bc247720a3deea2c60d1) - updated submodule ansible_playbooks [ [!178](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/178) ]
+
 ## 0.10.0 (2024-01-01)
 
 ### Features
