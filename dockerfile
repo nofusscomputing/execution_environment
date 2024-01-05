@@ -2,7 +2,7 @@
 FROM --platform=$TARGETPLATFORM quay.io/ansible/receptor:devel as receptor
 
 
-FROM --platform=$TARGETPLATFORM python:3.11-slim-bullseye
+FROM --platform=$TARGETPLATFORM python:3.11-bullseye
 
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
 ENV LC_ALL en_US.UTF-8
