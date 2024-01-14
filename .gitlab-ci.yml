@@ -8,7 +8,7 @@ variables:
   DOCKER_IMAGE_PUBLISH_NAME: 'ansible-ee'
   DOCKER_IMAGE_PUBLISH_REGISTRY: docker.io/nofusscomputing
   DOCKER_IMAGE_PUBLISH_URL: https://hub.docker.com/r/nofusscomputing/$DOCKER_IMAGE_PUBLISH_NAME
-  PAGES_ENVIRONMENT_PATH: projects/execution_environment/
+  PAGES_ENVIRONMENT_PATH: projects/ansible/execution_environment/
 
 include:
   - project: nofusscomputing/projects/gitlab-ci
