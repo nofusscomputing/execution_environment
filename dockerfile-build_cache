@@ -36,7 +36,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && dpkg --purge --force-all libc-bin \
   && apt-get install -y \
     openssh-client \
-    git
+    git \
+    postgresql-common \
+    postgresql-client \
+    mariadb-client
 
 
 RUN export DEBIAN_FRONTEND=noninteractive \
