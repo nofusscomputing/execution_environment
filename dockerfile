@@ -36,10 +36,10 @@ RUN apt update \
   && cd /tmp \
   && apt-get download \
     libc-bin \
-  && dpkg --extract ./libc-bin_*.deb /tmp/deb \
+  && dpkg --extract $(ls | grep libc-bin_ | grep -a '.deb') /tmp/deb \
   && cp /tmp/deb/sbin/ldconfig /sbin/ \
   && rm -Rf /tmp/deb \
-  && rm libc-bin_*.deb \
+  && rm $(ls | grep libc-bin_ | grep -a '.deb') \
   && apt-get install --reinstall \
     libc-bin \
     # EoF fixing dpkg ldconfig not found error
