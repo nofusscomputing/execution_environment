@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV ANSIBLE_PLAYBOOK_DIR=/etc/ansible/playbooks
 
-ENV ANSIBLE_COLLECTIONS_PATHS=/etc/ansible/collections
+ENV ANSIBLE_COLLECTIONS_PATH=/etc/ansible/collections
 
 
 COPY includes /
