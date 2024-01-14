@@ -1,3 +1,42 @@
+## 0.11.0 (2024-01-14)
+
+### Bug Fixes
+
+- [e4feaaa6](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/e4feaaa69dd6c1dd0ca2f7a8a827ca032d2b706a) - depreciated warning "ANSIBLE_COLLECTIONS_PATHS option, does not fit var naming standard, use the singular form ANSIBLE_COLLECTIONS_PATH instead" [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+- **docker_cache**: [d48901ba](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/d48901bab9f7a48f56b774245c399f1b079219e7) - ensure .tar.gz are built to wheels [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+- **docker_cache**: [2b3693e9](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/2b3693e957c6e3578ed1ade75574b260638dea4c) - migrated ldconfig fixes from ee container file [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+- **docker_cache**: [6b78eca4](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/6b78eca4563376d2346e3cd75e0887e8cb6bc15a) - build image binaries to match deployed binaries [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+- **docker_cache**: [26df54df](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/26df54dfa2ff2ee416cb824252900d7335533724) - build image must not be slim [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+
+### Code Refactor
+
+- **docker**: [b037996a](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/b037996a4dc9631f2395f5b14390415f943139ac) - get file name with ls and grep [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+- **docker_cache**: [0ae0fadf](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/0ae0fadfd220bd71d86c7096b114b95b7e04216d) - cleanup commands and place items in alphanumerical order [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+
+### Continious Integration
+
+- [18d15f29](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/18d15f2978ba9f3b7fd8802ed4d06d024d174a77) - update pages path [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+- **docker_cache**: [c5f9ae33](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/c5f9ae33a556e9ac5391505bf3d2cb184f7b69f7) - require compilation tools [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) [#23](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/23) ]
+- **docker_cache**: [cefc16d1](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/cefc16d145c931aeacd94e7a89f36a184074f50b) - start straight away as no deps for building [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+
+### Documentaton / Guides
+
+- [4a722374](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/4a722374a8561d301c82839dca0ab2f812f55b07) - update to current structure [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+
+### Features
+
+- **submodules**: [1b1ef850](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/1b1ef8505985530579f356193ce5529c915309f4) - manual update of playbooks and roles [ [!185](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/185) [#26](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/26) [!130](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/130) ]
+- **docker**: [5fe7a206](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/5fe7a206f0c7741986dffb6af82e97f9554c75ff) - add required deps for mysql ansible module [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) [#25](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/25) ]
+- **docker**: [4c69d8e2](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/4c69d8e2e56cb63d8890a2a70d53bac782ce3df3) - update base image from buster to bookworm [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) [#23](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/23) ]
+- **python**: [9730657d](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/9730657d1ec8bfdf1d780f88ae7513f0211540fb) - updated awxkit, python_gitlab and dns to current head versions [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+- **collections**: [a39be61a](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/a39be61aac7fce8404f4c60cc7752ec9ca8af0fe) - update all modules to current HEAD versions available [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) ]
+- **docker**: [4fcb5ee5](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/4fcb5ee5ea75840768fe81009d6bf761ddb0d0b6) - use python slim for base image [ [!184](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/184) [#23](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/23) ]
+- **submodule**: [cf39a914](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/cf39a9140be290f5b517143b00bc3bb7ff4fcde8) - update sub module playbooks [ [!67](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/67) ]
+- **contianer**: [5aba6b96](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/5aba6b96dc37c0ffb5611dd7f7842701efd000c8) - shrink container size [ [#23](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/23) ]
+- **ansible_playbooks**: [9e1c7175](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/9e1c7175999d061e9088bb2b37f67af0f1cb5a4b) - updated submodule ansible_playbooks [ [!182](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/182) ]
+- **ansible_playbooks**: [085de2b2](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/085de2b272fdb00189d8897aca55e64c826009c5) - updated submodule ansible_playbooks [ [!181](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/181) ]
+- **ansible_playbooks**: [73363320](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/733633209aa3b661f88993acccfdad39ebcd765c) - updated submodule ansible_playbooks [ [!180](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/180) ]
+
 ## 0.11.0rc0 (2024-01-02)
 
 ### Bug Fixes
