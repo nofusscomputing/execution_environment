@@ -50,7 +50,8 @@ Build/Cache Python Packages:
         --platform=$DOCKER_IMAGE_BUILD_TARGET_PLATFORMS . \
         --build-arg CI_JOB_TOKEN=$CI_JOB_TOKEN \
         --build-arg CI_API_V4_URL=$CI_API_V4_URL \
-        --build-arg CI_PROJECT_ID=$CI_PROJECT_ID
+        --build-arg CI_PROJECT_ID=$CI_PROJECT_ID \
+        --progress plain
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       when: never
