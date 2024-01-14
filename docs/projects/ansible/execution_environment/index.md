@@ -8,9 +8,9 @@ about: https://gitlab.com/nofusscomputing/projects/ansible/execution_environment
 
 This docker container is designed to be used with Ansible AWX/Tower or from within the Gitlab CI/CD Environment. Included in the container are the following projects from us:
 
-- [Ansible Playbooks](../ansible_playbooks/index.md)
+- [Ansible Playbooks](../playbooks/index.md)
 
-- [Ansible Roles](../ansible-roles/index.md)
+- [Ansible Roles](../roles/index.md)
 
 This container can be found at dockerhub at <https://hub.docker.com/r/nofusscomputing/ansible-ee> and for use from docker with `docker pull nofusscomputing/ansible-ee`. versioning and git tags are in accordance with semver.
 

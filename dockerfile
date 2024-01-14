@@ -2,7 +2,7 @@
 FROM --platform=$TARGETPLATFORM quay.io/ansible/receptor:devel as receptor
 
 
-FROM --platform=$TARGETPLATFORM python:3.11-bullseye
+FROM --platform=$TARGETPLATFORM python:3.11-slim-bookworm
 
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
 ENV LC_ALL en_US.UTF-8
@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV ANSIBLE_PLAYBOOK_DIR=/etc/ansible/playbooks
 
-ENV ANSIBLE_COLLECTIONS_PATHS=/etc/ansible/collections
+ENV ANSIBLE_COLLECTIONS_PATH=/etc/ansible/collections
 
 
 COPY includes /
@@ -36,10 +36,10 @@ RUN apt update \
   && cd /tmp \
   && apt-get download \
     libc-bin \
-  && dpkg --extract ./libc-bin_*.deb /tmp/deb \
+  && dpkg --extract $(ls | grep libc-bin_ | grep -a '.deb') /tmp/deb \
   && cp /tmp/deb/sbin/ldconfig /sbin/ \
   && rm -Rf /tmp/deb \
-  && rm libc-bin_*.deb \
+  && rm $(ls | grep libc-bin_ | grep -a '.deb') \
   && apt-get install --reinstall \
     libc-bin \
     # EoF fixing dpkg ldconfig not found error
@@ -57,6 +57,7 @@ RUN apt update \
     postgresql-common \
     postgresql-client \
     mariadb-client \
+    mariadb-client-core \
   && mkdir -p /etc/ansible/roles \
   && mkdir -p /etc/ansible/collections \
   && mkdir -p /workdir \
@@ -83,15 +84,15 @@ RUN pip install --index-url https://gitlab.com/api/v4/projects/45741845/packages
 
 
 RUN ansible-galaxy collection install \
-    awx.awx==23.5.0 \
+    awx.awx==23.6.0 \
     # ansible.posix.authorized_key for SSH
     ansible.posix==1.5.4 \
     ansible.utils==3.0.0 \
-    community.dns==2.6.4 \
+    community.dns==2.7.0 \
     # docker managment
-    community.docker==3.4.11 \
+    community.docker==3.5.0 \
     # community.general.gitlab_*
-    community.general==8.1.0 \
+    community.general==8.2.0 \
     community.mysql==3.8.0 \
-    community.postgresql==3.2.0 \
+    community.postgresql==3.3.0 \
     kubernetes.core==3.0.0

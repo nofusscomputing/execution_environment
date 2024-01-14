@@ -17,11 +17,18 @@ nav:
 
   - projects/index.md
 
-  - Ansible Roles:
+  - Ansible:
+
+    - projects/ansible/index.md
 
     - Execution Environment:
 
-      - projects/execution_environment/index.md
+      - projects/ansible/execution_environment/index.md
+
+    - Playbooks: projects/ansible/playbooks/index.md
+
+    - Roles: projects/ansible/roles/index.md
+
 
 - Operations: 
 

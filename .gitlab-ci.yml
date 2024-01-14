@@ -8,7 +8,7 @@ variables:
   DOCKER_IMAGE_PUBLISH_NAME: 'ansible-ee'
   DOCKER_IMAGE_PUBLISH_REGISTRY: docker.io/nofusscomputing
   DOCKER_IMAGE_PUBLISH_URL: https://hub.docker.com/r/nofusscomputing/$DOCKER_IMAGE_PUBLISH_NAME
-  PAGES_ENVIRONMENT_PATH: projects/execution_environment/
+  PAGES_ENVIRONMENT_PATH: projects/ansible/execution_environment/
 
 include:
   - project: nofusscomputing/projects/gitlab-ci
@@ -27,6 +27,7 @@ Build/Cache Python Packages:
     - name: docker:23-dind
       entrypoint: ["env", "-u", "DOCKER_HOST"]
       command: ["dockerd-entrypoint.sh"]
+  needs: []
   variables:
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
@@ -49,7 +50,8 @@ Build/Cache Python Packages:
         --platform=$DOCKER_IMAGE_BUILD_TARGET_PLATFORMS . \
         --build-arg CI_JOB_TOKEN=$CI_JOB_TOKEN \
         --build-arg CI_API_V4_URL=$CI_API_V4_URL \
-        --build-arg CI_PROJECT_ID=$CI_PROJECT_ID
+        --build-arg CI_PROJECT_ID=$CI_PROJECT_ID \
+        --progress plain
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       when: never

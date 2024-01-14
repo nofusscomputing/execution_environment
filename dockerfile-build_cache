@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM python:3.11-slim-bookworm as wheelbuild
+FROM --platform=$TARGETPLATFORM python:3.11-bookworm as wheelbuild
 
 ARG CI_JOB_TOKEN
 ARG CI_API_V4_URL
@@ -6,53 +6,77 @@ ARG CI_PROJECT_ID
 
 
 ENV LC_ALL en_US.UTF-8
+
 ENV PATH /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.cargo/bin::~/.cargo/bin
 
-RUN export DEBIAN_FRONTEND=noninteractive \
-  && dpkg-reconfigure debconf -f noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt update \
-  && apt install --reinstall -yq \
-    git \
+
+RUN dpkg-reconfigure debconf -f noninteractive
+
+
+RUN apt update
+
+# SoF fixing dpkg ldconfig not found error
+# Download Binary
+RUN cd /tmp \
+  && apt-get download \
+    libc-bin
+
+RUN ls -la
+
+# Extract Binary
+RUN cd /tmp; \
+  dpkg --extract $(ls | grep libc-bin_ | grep -a '.deb') /tmp/deb; ls -laR
+
+# # Extracted?
+# RUN ls -laR
+
+# Copy to home location
+RUN cp /tmp/deb/sbin/ldconfig /sbin/
+
+# Confirm present
+RUN ls -l /sbin/ldconfig
+
+# Confirm can be found 
+RUN which ldconfig
+
+# Cleanup
+# RUN rm -Rf /tmp/deb \
+#   && rm libc-bin_*.deb
+
+# Should re-install without issue
+RUN apt-get install --reinstall \
+    libc-bin 
+# EoF fixing dpkg ldconfig not found error
+# Set Locale to en_US as ansible requires a locale for it to function without chucking a tantrum!!
+
+
+RUN apt install -yq \
+    build-essential \
+    cargo \
     curl \
-    rustc cargo \
-    libpq-dev || true
-
-
-RUN mkdir -p /tmp/python_modules /tmp/python_builds
+    git \
+    libffi-dev \
+    libpq-dev \
+    libssl-dev \
+    mariadb-client \
+    mariadb-client-core \
+    openssh-client \
+    pkg-config \
+    postgresql-client \
+    postgresql-common \
+    python3-dev \
+    rustc
 
 
 RUN rustc --version \
   && cargo --version
 
-RUN export DEBIAN_FRONTEND=noninteractive \
-  && apt update \
-  && apt --fix-broken install \
-  && apt install -y libc-bin locales-all \
-  && apt update \
-  && apt install --reinstall -yq \
-    openssh-client \
-    git || true \
-  && dpkg --purge --force-all libc-bin \
-  && apt-get install -y \
-    openssh-client \
-    git
-
-
-RUN export DEBIAN_FRONTEND=noninteractive \
-  && apt update \
-  && apt install --no-install-recommends -yq libc-bin locales-all \
-  && apt-get install --reinstall -yq \
-    build-essential \
-    libssl-dev \
-    libffi-dev \
-    python3-dev \
-    cargo \
-    pkg-config \
-    libpq-dev || true
 
 
 RUN pip install --upgrade pip
+
 
 RUN pip install --upgrade \
     setuptools \
@@ -60,7 +84,12 @@ RUN pip install --upgrade \
     setuptools-rust \
     twine
 
+
 COPY requirements.txt /tmp/requirements.txt
+
+
+RUN mkdir -p /tmp/python_modules /tmp/python_builds
+
 
 RUN cd /tmp/python_modules \
   && pip download --dest . --check-build-dependencies \
@@ -70,7 +99,11 @@ RUN cd /tmp/python_modules \
 RUN cd /tmp/python_modules \
   # && export PATH=$PATH:~/.cargo/bin \
   && echo "[DEBUG] PATH=$PATH" \
-  && pip wheel --wheel-dir /tmp/python_builds --find-links . *.whl
+  && pip wheel --wheel-dir /tmp/python_builds --find-links . *.whl; \
+  pip wheel --wheel-dir /tmp/python_builds --find-links . *.tar.gz;
+
+RUN cd /tmp; \
+  ls -laR
 
 
 RUN TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token python -m twine upload --verbose --skip-existing --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi /tmp/python_builds/*
