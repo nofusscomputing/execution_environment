@@ -57,6 +57,7 @@ RUN apt update \
     postgresql-common \
     postgresql-client \
     mariadb-client \
+    mariadb-client-core \
   && mkdir -p /etc/ansible/roles \
   && mkdir -p /etc/ansible/collections \
   && mkdir -p /workdir \
