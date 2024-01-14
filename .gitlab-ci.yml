@@ -27,6 +27,7 @@ Build/Cache Python Packages:
     - name: docker:23-dind
       entrypoint: ["env", "-u", "DOCKER_HOST"]
       command: ["dockerd-entrypoint.sh"]
+  needs: []
   variables:
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
