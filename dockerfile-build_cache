@@ -98,7 +98,8 @@ RUN cd /tmp/python_modules \
 RUN cd /tmp/python_modules \
   # && export PATH=$PATH:~/.cargo/bin \
   && echo "[DEBUG] PATH=$PATH" \
-  && pip wheel --wheel-dir /tmp/python_builds --find-links . *.whl
+  && pip wheel --wheel-dir /tmp/python_builds --find-links . *.whl; \
+  pip wheel --wheel-dir /tmp/python_builds --find-links . *.tar.gz;
 
 RUN cd /tmp; \
   ls -laR
