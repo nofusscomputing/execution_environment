@@ -12,6 +12,18 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && dpkg-reconfigure debconf -f noninteractive
 
 RUN apt update \
+    # SoF fixing dpkg ldconfig not found error
+  && cd /tmp \
+  && apt-get download \
+    libc-bin \
+  && dpkg --extract ./libc-bin_*.deb /tmp/deb \
+  && cp /tmp/deb/sbin/ldconfig /sbin/ \
+  && rm -Rf /tmp/deb \
+  && rm libc-bin_*.deb \
+  && apt-get install --reinstall \
+    libc-bin \
+    # EoF fixing dpkg ldconfig not found error
+    # Set Locale to en_US as ansible requires a locale for it to function without chucking a tantrum!!
   && apt install --reinstall -yq \
     git \
     curl \
