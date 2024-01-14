@@ -51,7 +51,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     git \
     postgresql-common \
     postgresql-client \
-    mariadb-client
+    mariadb-client \
+    build-essential
 
 
 RUN export DEBIAN_FRONTEND=noninteractive \
