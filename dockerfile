@@ -78,6 +78,8 @@ COPY --from=receptor /usr/bin/receptor /usr/bin/receptor
 
 RUN pip install --upgrade pip; \
   mkdir -p /var/run/receptor; \
+  mkdir -p /etc/receptor; \
+  chmod 777 /etc/receptor; \
   git config --global --add safe.directory '*'
 
 RUN pip install --index-url https://gitlab.com/api/v4/projects/45741845/packages/pypi/simple -r /tmp/requirements.txt
