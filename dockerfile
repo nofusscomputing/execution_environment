@@ -1,5 +1,5 @@
 
-FROM --platform=$TARGETPLATFORM quay.io/ansible/receptor:devel as receptor
+FROM --platform=$TARGETPLATFORM quay.io/ansible/receptor:v1.4.4 as receptor
 
 
 FROM --platform=$TARGETPLATFORM python:3.11-slim-bookworm
