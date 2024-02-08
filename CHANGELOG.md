@@ -1,3 +1,10 @@
+## 0.13.0 (2024-02-08)
+
+### Features
+
+- **receptor**: [513a7344](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/513a7344afafbcedf880af011108b71a4c1d7b92) - update to dev -> v1.4.4 [ [!212](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/212) [#27](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/27) ]
+- **ansible_playbooks**: [687b3cb4](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/687b3cb45756b229ae2e4a61245b271000f6399e) - updated submodule ansible_playbooks [ [!211](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/211) ]
+
 ## 0.12.0 (2024-02-07)
 
 ### Features
