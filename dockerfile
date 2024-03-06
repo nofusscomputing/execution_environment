@@ -98,4 +98,4 @@ RUN ansible-galaxy collection install \
     community.mysql==3.8.0 \
     community.postgresql==3.3.0 \
     kubernetes.core==3.0.0 \
-    theforeman-foreman==4.0.0
+    theforeman.foreman==4.0.0
