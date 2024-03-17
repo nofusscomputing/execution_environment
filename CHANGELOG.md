@@ -1,3 +1,14 @@
+## 0.15.0 (2024-03-17)
+
+### Features
+
+- **collection**: [2e712ed1](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/2e712ed1fd58eb26c3cd5fba6dddd8ce7f14e283) - nofusscomputing.kubernetes set to ver 1.2.0 [ [!243](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/243) ]
+- **ansible_playbooks**: [f2afc87b](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/f2afc87b4f84b6dc5e657111f20fa7d886280b01) - updated submodule ansible_playbooks [ [!242](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/242) ]
+- **ansible-roles**: [a0280666](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/a0280666c4864b4308db695862cf8de856e8eab0) - updated submodule ansible-roles [ [!242](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/242) ]
+- **ansible-roles**: [8b452a26](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/8b452a265851f5bc69d939e8f4106833fddca1f9) - updated submodule ansible-roles [ [!242](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/242) ]
+- **ansible-roles**: [0b156cc0](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/0b156cc0c8b12fcf137dd72ab6f9b632c1dc99cd) - updated submodule ansible-roles [ [!242](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/242) ]
+- **ansible_playbooks**: [8ce0da96](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/8ce0da96ad501b7c077b9b2c4acb8820439b1831) - updated submodule ansible_playbooks [ [!241](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/241) ]
+
 ## 0.14.0 (2024-03-14)
 
 ### Bug Fixes
