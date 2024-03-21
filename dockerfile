@@ -99,4 +99,4 @@ RUN ansible-galaxy collection install \
     community.postgresql==3.4.0 \
     theforeman.foreman==4.0.0; \
   ansible-galaxy collection install --pre \
-    nofusscomputing.kubernetes==1.4.0
+    nofusscomputing.kubernetes==1.5.0
