@@ -98,6 +98,7 @@ RUN ansible-galaxy collection install \
     community.general==8.4.0 \
     community.mysql==3.9.0 \
     community.postgresql==3.4.0 \
+    netbox.netbox==3.17.0 \
     theforeman.foreman==4.0.0; \
   ansible-galaxy collection install --pre \
     nofusscomputing.kubernetes==1.5.0
