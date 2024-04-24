@@ -46,7 +46,7 @@ RUN which ldconfig
 #   && rm libc-bin_*.deb
 
 # Should re-install without issue
-RUN apt-get install --reinstall \
+RUN apt-get install -y --reinstall \
     libc-bin 
 # EoF fixing dpkg ldconfig not found error
 # Set Locale to en_US as ansible requires a locale for it to function without chucking a tantrum!!
