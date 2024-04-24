@@ -1,8 +1,38 @@
+ARG release_name=bookworm
+
+ARG kubernetes_version=1.29
+
 
 FROM --platform=$TARGETPLATFORM quay.io/ansible/receptor:v1.4.4 as receptor
 
 
-FROM --platform=$TARGETPLATFORM python:3.11-slim-bookworm
+FROM --platform=$TARGETPLATFORM python:3.11-slim-${release_name} as prep
+
+
+ARG kubernetes_version
+
+
+ENV DEBIAN_FRONTEND noninteractive
+
+
+RUN apt update; \
+  apt install -y \
+    curl \
+    gpg
+
+
+RUN curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null; \
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" > /etc/apt/sources.list.d/helm.list; \
+  cat /etc/apt/sources.list.d/helm.list;
+
+
+RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v${kubernetes_version}/deb/Release.key | gpg --dearmor | tee /usr/share/keyrings/kubernetes.gpg > /dev/null; \
+  echo "deb [signed-by=/usr/share/keyrings/kubernetes.gpg] https://pkgs.k8s.io/core:/stable:/v${kubernetes_version}/deb/ /" > /etc/apt/sources.list.d/kubernetes.list; \
+  cat /etc/apt/sources.list.d/kubernetes.list;
+
+
+FROM --platform=$TARGETPLATFORM python:3.11-slim-${release_name}
+
 
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
 ENV LC_ALL en_US.UTF-8
@@ -40,19 +70,34 @@ RUN apt update \
   && cp /tmp/deb/sbin/ldconfig /sbin/ \
   && rm -Rf /tmp/deb \
   && rm $(ls | grep libc-bin_ | grep -a '.deb') \
-  && apt-get install --reinstall \
+  && apt-get install -y --reinstall \
     libc-bin \
     # EoF fixing dpkg ldconfig not found error
     # Set Locale to en_US as ansible requires a locale for it to function without chucking a tantrum!!
   && apt install -y \
     locales \
+    apt-transport-https \
   && sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen \
-  && locale-gen \
-  && apt list --upgradable \
+  && locale-gen;
+
+
+COPY --from=prep --chmod=644 /etc/apt/sources.list.d/helm.list /etc/apt/sources.list.d/helm.list
+
+COPY --from=prep --chmod=644 /usr/share/keyrings/helm.gpg /usr/share/keyrings/helm.gpg
+
+COPY --from=prep --chmod=644 /etc/apt/sources.list.d/kubernetes.list /etc/apt/sources.list.d/kubernetes.list
+
+COPY --from=prep --chmod=644 /usr/share/keyrings/kubernetes.gpg /usr/share/keyrings/kubernetes.gpg
+
+
+RUN apt update; \
+  apt list --upgradable \
   && apt upgrade --no-install-recommends -y \
   && apt-get install --no-install-recommends -y \
     openssh-client \
     git \
+    helm \
+    kubectl \
     sshpass \
     postgresql-common \
     postgresql-client \
@@ -65,8 +110,9 @@ RUN apt update \
     # see issue https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues/9 for following two lines
   && apt remove -y \
     python3* \
-    libpython3* \
-  && rm -rf /var/lib/apt/lists/*
+    libpython3*; \
+  helm plugin install https://github.com/databus23/helm-diff; \
+  rm -rf /var/lib/apt/lists/*
 
 
 WORKDIR /workdir
@@ -90,6 +136,7 @@ RUN ansible-galaxy collection install \
     # ansible.posix.authorized_key for SSH
     ansible.posix==1.5.4 \
     ansible.utils==3.1.0 \
+    community.crypto==2.18.0 \
     community.dns==2.8.1 \
     # docker managment
     community.docker==3.8.0 \
@@ -97,6 +144,7 @@ RUN ansible-galaxy collection install \
     community.general==8.4.0 \
     community.mysql==3.9.0 \
     community.postgresql==3.4.0 \
+    netbox.netbox==3.17.0 \
     theforeman.foreman==4.0.0; \
   ansible-galaxy collection install --pre \
-    nofusscomputing.kubernetes==1.2.0
+    nofusscomputing.kubernetes==1.7.1
