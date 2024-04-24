@@ -112,7 +112,7 @@ RUN apt update; \
     python3* \
     libpython3*; \
   helm plugin install https://github.com/databus23/helm-diff; \
-  && rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/*
 
 
 WORKDIR /workdir
