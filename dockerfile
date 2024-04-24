@@ -1,11 +1,15 @@
 ARG release_name=bookworm
 
+ARG kubernetes_version=1.29
+
+
 FROM --platform=$TARGETPLATFORM quay.io/ansible/receptor:v1.4.4 as receptor
 
 
 FROM --platform=$TARGETPLATFORM python:3.11-slim-${release_name} as prep
 
 
+ARG kubernetes_version
 
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -20,6 +24,11 @@ RUN apt update; \
 RUN curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null; \
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" > /etc/apt/sources.list.d/helm.list; \
   cat /etc/apt/sources.list.d/helm.list;
+
+
+RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v${kubernetes_version}/deb/Release.key | gpg --dearmor | tee /usr/share/keyrings/kubernetes.gpg > /dev/null; \
+  echo "deb [signed-by=/usr/share/keyrings/kubernetes.gpg] https://pkgs.k8s.io/core:/stable:/v${kubernetes_version}/deb/ /" > /etc/apt/sources.list.d/kubernetes.list; \
+  cat /etc/apt/sources.list.d/kubernetes.list;
 
 
 FROM --platform=$TARGETPLATFORM python:3.11-slim-${release_name}
@@ -76,6 +85,10 @@ COPY --from=prep --chmod=644 /etc/apt/sources.list.d/helm.list /etc/apt/sources.
 
 COPY --from=prep --chmod=644 /usr/share/keyrings/helm.gpg /usr/share/keyrings/helm.gpg
 
+COPY --from=prep --chmod=644 /etc/apt/sources.list.d/kubernetes.list /etc/apt/sources.list.d/kubernetes.list
+
+COPY --from=prep --chmod=644 /usr/share/keyrings/kubernetes.gpg /usr/share/keyrings/kubernetes.gpg
+
 
 RUN apt update; \
   apt list --upgradable \
@@ -84,6 +97,7 @@ RUN apt update; \
     openssh-client \
     git \
     helm \
+    kubectl \
     sshpass \
     postgresql-common \
     postgresql-client \
