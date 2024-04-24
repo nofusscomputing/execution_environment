@@ -12,6 +12,8 @@ PyMySQL==1.1.0
 pytz==2024.1
 
 PyYAML>=3.11
+# kubernetes.core.k8s
+jsonpatch
 
 dnspython==2.4.2
 
