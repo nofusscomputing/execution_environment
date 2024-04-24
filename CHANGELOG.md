@@ -1,3 +1,25 @@
+## 0.16.0 (2024-04-24)
+
+### Bug Fixes
+
+- **kubernetes**: [63a1cc7e](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/63a1cc7e137018bfd829a7e817d567c80206f747) - update nofusscomputing.kubernetes 1.5.0 -> 1.7.1 [ [!247](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/247) ]
+- **kubernetes**: [30a9828b](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/30a9828b312a53d0da6c09d64867171b24ec99e6) - add missing python module jsonpatch [ [!251](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/251) [!247](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/247) ]
+- **build_cache_image**: [061475fc](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/061475fced3bf6f5e5007021a2a8bb6b7de4d533) - correct missing flag [ [!251](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/251) ]
+- [25146e75](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/25146e758639d6556757854daf58be320c0605c3) - typo [ [!251](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/251) ]
+
+### Features
+
+- [838112ad](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/838112adc452f39c46e882533c011ce23f29de85) - Install kubectl [ [!251](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/251) ]
+- **app**: [e98c6b38](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/e98c6b384445b05844b16666492bc1f0cae6330c) - install helm and helm diff [ [!251](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/251) ]
+- **collection**: [7e0fece6](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/7e0fece6fc188240dd8155cfc891f5ff29ac11e6) - add netbox collection [ [!250](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/250) ]
+- **ansible_playbooks**: [2eda50db](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/2eda50db8dfdbcd3c93032ef38906a6daa10478c) - updated submodule ansible_playbooks [ [!249](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/249) ]
+- **collection**: [3ee6d0d7](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/3ee6d0d7fe0cb49538d7d9e7f9a4922b7d75f942) - add community.crypto for openssl ops [ [!247](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/247) ]
+- **ansible-roles**: [edebaa88](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/edebaa8806d6ccceb53123591f4278bc9bcdc308) - updated submodule ansible-roles [ [!248](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/248) ]
+- **collection**: [837dcd9d](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/837dcd9d1b51d2e69aa1e537e003952f96d5ebac) - nofusscomputing.kubernetes 1.4.0 -> 1.5.0 [ [!247](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/247) ]
+- **collection**: [adfba598](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/adfba5980131d1e21ba21b14c0627e86e91ab77d) - nofusscomputing.kubernetes 1.2.0 -> 1.4.0 [ [!247](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/247) [!50](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/50) [!51](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/51) ]
+- **ansible_playbooks**: [7ed472f8](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/7ed472f83f63ec365001ba8d3ff344e4bead489b) - updated submodule ansible_playbooks [ [!246](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/246) ]
+- **ansible_playbooks**: [4ece1566](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/4ece1566548ab826312451192c0a817687af63d7) - updated submodule ansible_playbooks [ [!245](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/245) ]
+
 ## 0.15.0 (2024-03-17)
 
 ### Features
