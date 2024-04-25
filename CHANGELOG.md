@@ -1,3 +1,14 @@
+## 0.17.0 (2024-04-25)
+
+### Bug Fixes
+
+- **submodule**: [3b54c1df](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/3b54c1dfdd60c74e59e61bbd1eceff556300a449) - update to commit that exists [ [!252](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/252) ]
+- **kubernetes**: [940daba8](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/940daba84b197fb0bda82222637a2374d8a8301f) - update nofusscomputing.kubernetes 1.7.1 -> 1.7.2 [ [!247](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/247) ]
+
+### Features
+
+- **ansible-roles**: [e59644a6](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/e59644a6c21beee0ea18b1858e8cf75a365acd6e) - updated submodule ansible-roles [ [!253](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/253) ]
+
 ## 0.16.0 (2024-04-24)
 
 ### Bug Fixes
