@@ -1,3 +1,10 @@
+## 0.17.1 (2024-05-02)
+
+### Bug Fixes
+
+- **collection**: [5288a657](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/5288a657cc43429a5a59ae3cfefca754ba421bbb) - add nofusscomputing.netbox [ [!254](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/254) ]
+- **collection**: [d71ee25c](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/d71ee25c2450567217f529e143723b05ac5cd6e0) - add nofusscomputing.glpi [ [!254](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/254) ]
+
 ## 0.17.0 (2024-04-25)
 
 ### Bug Fixes
