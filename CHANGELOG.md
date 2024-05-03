@@ -1,3 +1,10 @@
+## 0.18.0 (2024-05-03)
+
+### Features
+
+- **collection**: [3ba33562](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/3ba335620cfd878048d0bceeadb45b3b35017012) - bump nofusscomputing.kubernetes 1.8.1-a2 -> 1.9.0 [ [!254](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/254) ]
+- **python**: [592978c5](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/592978c5f45f920fee4d64d325e73aa548b8454d) - bump ansible-core 2.16.1 -> 2.16.6 [ [!255](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/255) ]
+
 ## 0.18.0rc0 (2024-05-02)
 
 ### Features
