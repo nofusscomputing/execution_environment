@@ -1,3 +1,9 @@
+## 0.18.0rc0 (2024-05-02)
+
+### Features
+
+- **collection**: [f64a45d9](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/f64a45d921deeb4ffd7858e8cdd91f6f6756165b) - bump nofusscomputing.kubernetes 1.7.2 -> 1.8.1-a2 [ [!254](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/254) ]
+
 ## 0.17.1 (2024-05-02)
 
 ### Bug Fixes
