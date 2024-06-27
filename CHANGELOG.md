@@ -1,3 +1,12 @@
+## 0.19.0 (2024-06-27)
+
+### Features
+
+- **collection**: [b9e8e2a3](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/b9e8e2a32cac22bd02ae8250c20f7ff5051f897a) - bump nofusscomputing.kubernetes1.10.2 -> 1.10.3 [ [!256](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/256) [!69](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/69) [!70](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/70) ]
+- **collection**: [7e13e2f3](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/7e13e2f31d92a21248bf4f806ec273c14b38c717) - bump nofusscomputing.kubernetes1.10.1 -> 1.10.2 [ [!256](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/256) [!67](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/67) ]
+- **collection**: [def6cede](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/def6cede457363f4712ada572d5b1f7fcee97c01) - bump nofusscomputing.kubernetes 1.10.0 -> 1.10.1 [ [!256](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/256) [!67](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/67) ]
+- **collection**: [7be77a2a](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/commit/7be77a2a9b29abf62565e6819ea5cf6f8b567c0f) - bump nofusscomputing.kubernetes 1.9.0 -> 1.10.0 [ [!256](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/256) [!66](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/66) [!65](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/merge_requests/65) ]
+
 ## 0.18.0 (2024-05-03)
 
 ### Features
