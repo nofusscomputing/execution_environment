@@ -148,5 +148,5 @@ RUN ansible-galaxy collection install \
     theforeman.foreman==4.0.0; \
   ansible-galaxy collection install --pre \
     nofusscomputing.glpi==0.1.0-a1 \
-    nofusscomputing.kubernetes==1.11.0 \
+    nofusscomputing.kubernetes==1.13.0 \
     nofusscomputing.netbox==0.4.0
