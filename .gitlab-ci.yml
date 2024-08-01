@@ -17,6 +17,7 @@ include:
       - template/automagic.gitlab-ci.yaml
   #- template: Jobs/Container-Scanning.gitlab-ci.yml # see https://gitlab.com/gitlab-org/gitlab/-/issues/381665
 
+
 .MKDocs_Build:
   image: python:3.11-buster
 
