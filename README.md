@@ -8,6 +8,8 @@
 
 ![Project Status - Active](https://img.shields.io/badge/Project%20Status-Active-green?logo=gitlab&style=plastic) 
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/nofusscomputing/ansible-ee?style=plastic&logo=docker&color=0db7ed)](https://hub.docker.com/r/nofusscomputing/ansible-ee) [![Artifact Hub](https://img.shields.io/endpoint?style=plastic&url=https://artifacthub.io/badge/repository/nfc-ansible-ee)](https://artifacthub.io/packages/search?repo=nfc-ansible-ee)
+
 <br>
 
 ![Gitlab forks count](https://img.shields.io/badge/dynamic/json?label=Forks&query=%24.forks_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F45741845%2F&color=ff782e&logo=gitlab&style=plastic) ![Gitlab stars](https://img.shields.io/badge/dynamic/json?label=Stars&query=%24.star_count&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F45741845%2F&color=ff782e&logo=gitlab&style=plastic) [![Open Issues](https://img.shields.io/badge/dynamic/json?color=ff782e&logo=gitlab&style=plastic&label=Open%20Issues&query=%24.statistics.counts.opened&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F45741845%2Fissues_statistics)](https://gitlab.com/nofusscomputing/projects/ansible/execution_environment/-/issues)
