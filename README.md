@@ -8,7 +8,7 @@
 
 ![Project Status - Active](https://img.shields.io/badge/Project%20Status-Active-green?logo=gitlab&style=plastic) 
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/nofusscomputing/ansible-ee?style=plastic&logo=docker&color=0db7ed)](https://hub.docker.com/r/nofusscomputing/ansible-ee) [![Artifact Hub](https://img.shields.io/endpoint?style=plastic&url=https://artifacthub.io/badge/repository/nfc-ansible-ee)](https://artifacthub.io/packages/search?repo=nfc-ansible-ee)
+[![Docker Pulls](https://img.shields.io/docker/pulls/nofusscomputing/ansible-ee?style=plastic&logo=docker&color=0db7ed)](https://hub.docker.com/r/nofusscomputing/ansible-ee) [![Artifact Hub](https://img.shields.io/endpoint?style=plastic&url=https://artifacthub.io/badge/repository/nfc-ansible-ee)](https://artifacthub.io/packages/container/nfc-ansible-ee/ansible-ee)
 
 <br>
 

@@ -49,17 +49,11 @@ COPY includes /
 
 # Ref: https://github.com/opencontainers/image-spec/blob/d86384efdb8c30770a92415c100f57a9bffbb64e/annotations.md
 LABEL \
-  # org.opencontainers.image.authors="{contributor url}" \
   org.opencontainers.image.vendor="No Fuss Computing" \
-  # org.opencontainers.image.url="{dockerhub url}" \
-  # org.opencontainers.image.documentation="{docs url}" \
-  # org.opencontainers.image.source="{repo url}" \
-  # org.opencontainers.image.revision="{git commit sha at time of build}" \
   org.opencontainers.image.title="Ansible Execution Environment" \
-  org.opencontainers.image.description="An ansible execution environment for awx/tower and CI/CD pipelines" \
+  org.opencontainers.image.description="An ansible execution environment for aap/awx and CI/CD pipelines" \
   org.opencontainers.image.vendor="No Fuss Computing" \
   io.artifacthub.package.license="MIT"
-  # org.opencontainers.image.version="{git tag}"
 
 
 RUN apt update \
