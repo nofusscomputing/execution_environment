@@ -36,7 +36,7 @@ FROM --platform=$TARGETPLATFORM python:3.11-slim-${release_name}
 
 ARG CI_COMMIT_SHA
 
-ENV CI_COMMIT_SHA=${CI_COMMIT_SHA}
+ENV REPO_BUILD_SHA=${CI_COMMIT_SHA}
 # Ansible chucks a wobbler without. see: https://github.com/ansible/ansible/issues/78283
 ENV LC_ALL en_US.UTF-8
 
