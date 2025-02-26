@@ -62,3 +62,57 @@ Build/Cache Python Packages:
       allow_failure: true
       when: manual
     - when: never
+
+
+Docker Container:
+  extends: .build_docker_container
+  resource_group: build
+  needs: []
+  script: 
+    - update-binfmts --display
+    - |
+
+      if [ "0$DOCKER_IMAGE_BUILD_TARGET_PLATFORMS" != "0" ]; then
+
+        echo "[DEBUG] building multiarch/specified arch image";
+
+        docker buildx build --platform=$DOCKER_IMAGE_BUILD_TARGET_PLATFORMS . \
+          --label org.opencontainers.image.created="$(date '+%Y-%m-%d %H:%M:%S%:z')" \
+          --label org.opencontainers.image.documentation="$CI_PROJECT_URL" \
+          --label org.opencontainers.image.source="$CI_PROJECT_URL" \
+          --label org.opencontainers.image.revision="$CI_COMMIT_SHA" \
+        --push \
+        --build-arg CI_JOB_TOKEN=$CI_JOB_TOKEN --build-arg CI_PROJECT_ID=$CI_PROJECT_ID --build-arg CI_API_V4_URL=$CI_API_V4_URL \
+        --build-arg CI_COMMIT_SHA=$CI_COMMIT_SHA \
+        --file $DOCKER_DOCKERFILE \
+        --tag $DOCKER_IMAGE_BUILD_REGISTRY/$DOCKER_IMAGE_BUILD_NAME:$DOCKER_IMAGE_BUILD_TAG;
+
+        docker buildx imagetools inspect $DOCKER_IMAGE_BUILD_REGISTRY/$DOCKER_IMAGE_BUILD_NAME:$DOCKER_IMAGE_BUILD_TAG;
+
+        # during docker multi platform build there are >=3 additional unknown images added to gitlab container registry. cleanup
+        
+        DOCKER_MULTI_ARCH_IMAGES=$(docker buildx imagetools inspect "$DOCKER_IMAGE_BUILD_REGISTRY/$DOCKER_IMAGE_BUILD_NAME:$DOCKER_IMAGE_BUILD_TAG" --format "{{ range .Manifest.Manifests }}{{ if ne (print .Platform) \"&{unknown unknown  [] }\" }}$DOCKER_IMAGE_BUILD_REGISTRY/$DOCKER_IMAGE_BUILD_NAME:$DOCKER_IMAGE_BUILD_TAG@{{ println .Digest }}{{end}} {{end}}");
+
+        docker buildx imagetools create $DOCKER_MULTI_ARCH_IMAGES --tag $DOCKER_IMAGE_BUILD_REGISTRY/$DOCKER_IMAGE_BUILD_NAME:$DOCKER_IMAGE_BUILD_TAG;
+
+        docker buildx imagetools inspect $DOCKER_IMAGE_BUILD_REGISTRY/$DOCKER_IMAGE_BUILD_NAME:$DOCKER_IMAGE_BUILD_TAG;
+
+      else
+
+        echo "[DEBUG] building image";
+
+        docker build . \
+          --label org.opencontainers.image.created="$(date '+%Y-%m-%d %H:%M:%S%:z')" \
+          --label org.opencontainers.image.documentation="$CI_PROJECT_URL" \
+          --label org.opencontainers.image.source="$CI_PROJECT_URL" \
+          --label org.opencontainers.image.url="$CI_PROJECT_URL/-/releases/$(cz -n cz_nfc version --project)" \
+          --label org.opencontainers.image.version="$(cz -n cz_nfc version --project)" \
+          --label org.opencontainers.image.revision="$CI_COMMIT_SHA" \
+        --build-arg CI_JOB_TOKEN=$CI_JOB_TOKEN --build-arg CI_PROJECT_ID=$CI_PROJECT_ID --build-arg CI_API_V4_URL=$CI_API_V4_URL \
+        --build-arg CI_COMMIT_SHA=$CI_COMMIT_SHA \
+        --file $DOCKER_DOCKERFILE \
+        --tag $DOCKER_IMAGE_BUILD_REGISTRY/$DOCKER_IMAGE_BUILD_NAME:$DOCKER_IMAGE_BUILD_TAG;
+      
+      docker push $DOCKER_IMAGE_BUILD_REGISTRY/$DOCKER_IMAGE_BUILD_NAME:$DOCKER_IMAGE_BUILD_TAG;
+
+      fi
